@@ -1,0 +1,23 @@
+running egg_info
+writing ../../build/arduino_output/arduino_output.egg-info/PKG-INFO
+writing dependency_links to ../../build/arduino_output/arduino_output.egg-info/dependency_links.txt
+writing entry points to ../../build/arduino_output/arduino_output.egg-info/entry_points.txt
+writing requirements to ../../build/arduino_output/arduino_output.egg-info/requires.txt
+writing top-level names to ../../build/arduino_output/arduino_output.egg-info/top_level.txt
+reading manifest file '../../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+running build
+running build_py
+copying arduino_output/arduino_ros_test.py -> /home/valdemar-linus/p5/project/ws/build/arduino_output/build/lib/arduino_output
+running install
+running install_lib
+copying /home/valdemar-linus/p5/project/ws/build/arduino_output/build/lib/arduino_output/arduino_ros_test.py -> /home/valdemar-linus/p5/project/ws/install/arduino_output/lib/python3.12/site-packages/arduino_output
+byte-compiling /home/valdemar-linus/p5/project/ws/install/arduino_output/lib/python3.12/site-packages/arduino_output/arduino_ros_test.py to arduino_ros_test.cpython-312.pyc
+running install_data
+running install_egg_info
+removing '/home/valdemar-linus/p5/project/ws/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info' (and everything under it)
+Copying ../../build/arduino_output/arduino_output.egg-info to /home/valdemar-linus/p5/project/ws/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info
+running install_scripts
+Installing arduino_talker script to /home/valdemar-linus/p5/project/ws/install/arduino_output/lib/arduino_output
+writing list of installed files to '/home/valdemar-linus/p5/project/ws/build/arduino_output/install.log'

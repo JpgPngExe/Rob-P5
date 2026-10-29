@@ -1,0 +1,2 @@
+[console_scripts]
+arduino_talker = arduino_output.arduino_ros_test:main

@@ -1,0 +1,36 @@
+[0.501s] Invoking command in '/home/valdemar-linus/p5/project/ws/src/arduino_output': PYTHONPATH=/home/valdemar-linus/p5/project/ws/src/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/arduino_output build --build-base /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build install --record /home/valdemar-linus/p5/project/ws/src/build/arduino_output/install.log --install-scripts $base/lib/arduino_output --single-version-externally-managed install_data
+[0.666s] running egg_info
+[0.666s] creating ../build/arduino_output/arduino_output.egg-info
+[0.677s] writing ../build/arduino_output/arduino_output.egg-info/PKG-INFO
+[0.677s] writing dependency_links to ../build/arduino_output/arduino_output.egg-info/dependency_links.txt
+[0.677s] writing requirements to ../build/arduino_output/arduino_output.egg-info/requires.txt
+[0.677s] writing top-level names to ../build/arduino_output/arduino_output.egg-info/top_level.txt
+[0.677s] writing manifest file '../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.701s] reading manifest file '../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.701s] adding license file 'LICENSE'
+[0.701s] writing manifest file '../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.702s] running build
+[0.702s] running build_py
+[0.702s] creating /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build
+[0.702s] creating /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib
+[0.702s] creating /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output
+[0.702s] copying arduino_output/arduino-ros-test.py -> /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output
+[0.702s] copying arduino_output/__init__.py -> /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output
+[0.702s] running install
+[0.706s] running install_lib
+[0.718s] creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output
+[0.718s] copying /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output/arduino-ros-test.py -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output
+[0.719s] copying /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output/__init__.py -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output
+[0.719s] byte-compiling /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output/arduino-ros-test.py to arduino-ros-test.cpython-312.pyc
+[0.719s] byte-compiling /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output/__init__.py to __init__.cpython-312.pyc
+[0.719s] running install_data
+[0.720s] creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index
+[0.720s] creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index/resource_index
+[0.720s] creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index/resource_index/packages
+[0.720s] copying resource/arduino_output -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index/resource_index/packages
+[0.720s] copying package.xml -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/arduino_output
+[0.720s] running install_egg_info
+[0.733s] Copying ../build/arduino_output/arduino_output.egg-info to /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info
+[0.733s] running install_scripts
+[0.811s] writing list of installed files to '/home/valdemar-linus/p5/project/ws/src/build/arduino_output/install.log'
+[0.831s] Invoked command in '/home/valdemar-linus/p5/project/ws/src/arduino_output' returned '0': PYTHONPATH=/home/valdemar-linus/p5/project/ws/src/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(.venv) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/arduino_output build --build-base /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build install --record /home/valdemar-linus/p5/project/ws/src/build/arduino_output/install.log --install-scripts $base/lib/arduino_output --single-version-externally-managed install_data

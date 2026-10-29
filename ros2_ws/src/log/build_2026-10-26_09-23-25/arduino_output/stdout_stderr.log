@@ -1,0 +1,34 @@
+running egg_info
+creating ../build/arduino_output/arduino_output.egg-info
+writing ../build/arduino_output/arduino_output.egg-info/PKG-INFO
+writing dependency_links to ../build/arduino_output/arduino_output.egg-info/dependency_links.txt
+writing requirements to ../build/arduino_output/arduino_output.egg-info/requires.txt
+writing top-level names to ../build/arduino_output/arduino_output.egg-info/top_level.txt
+writing manifest file '../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+reading manifest file '../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build
+creating /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib
+creating /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output
+copying arduino_output/arduino-ros-test.py -> /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output
+copying arduino_output/__init__.py -> /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output
+running install
+running install_lib
+creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output
+copying /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output/arduino-ros-test.py -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output
+copying /home/valdemar-linus/p5/project/ws/src/build/arduino_output/build/lib/arduino_output/__init__.py -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output
+byte-compiling /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output/arduino-ros-test.py to arduino-ros-test.cpython-312.pyc
+byte-compiling /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index
+creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index/resource_index
+creating /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index/resource_index/packages
+copying resource/arduino_output -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/ament_index/resource_index/packages
+copying package.xml -> /home/valdemar-linus/p5/project/ws/src/install/arduino_output/share/arduino_output
+running install_egg_info
+Copying ../build/arduino_output/arduino_output.egg-info to /home/valdemar-linus/p5/project/ws/src/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info
+running install_scripts
+writing list of installed files to '/home/valdemar-linus/p5/project/ws/src/build/arduino_output/install.log'
