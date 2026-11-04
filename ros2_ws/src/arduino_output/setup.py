@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [            
             'arduino_talker = arduino_output.arduino_ros_test:main',
+            'test_listener = arduino_output.test_listener:main',
         ],
     },
 )

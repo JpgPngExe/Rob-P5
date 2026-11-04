@@ -11,7 +11,7 @@ class SerialPublisher(Node):
         self.arduinoData = serial.Serial('/dev/ttyACM0',19200,timeout=0.0033,)
         # Create publisher for arduino output
         self.publisher = self.create_publisher(String,'arduino_output', 10)
-        timer_period = 0.033  # seconds
+        timer_period = 0.0199  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
 
@@ -21,7 +21,7 @@ class SerialPublisher(Node):
         line = self.arduinoData.readline()
         text = line.decode('utf-8', errors='replace').strip()
 
-        self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, text="{text}"')
+        #self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, text="{text}"')
 
         msg = String()
         msg.data = text

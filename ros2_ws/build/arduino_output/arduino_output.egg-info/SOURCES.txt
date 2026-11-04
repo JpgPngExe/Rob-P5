@@ -11,6 +11,7 @@ setup.py
 ../../build/arduino_output/arduino_output.egg-info/zip-safe
 arduino_output/__init__.py
 arduino_output/arduino_ros_test.py
+arduino_output/test_listener.py
 resource/arduino_output
 test/test_copyright.py
 test/test_flake8.py
