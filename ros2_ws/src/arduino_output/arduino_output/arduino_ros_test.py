@@ -8,10 +8,10 @@ class SerialPublisher(Node):
     def __init__(self):
         super().__init__("arduino_output")
 
-        self.arduinoData = serial.Serial('/dev/ttyACM0',19200,timeout=0.0033,)
+        self.arduinoData = serial.Serial('/dev/ttyACM0',115200,timeout=0.008,)
         # Create publisher for arduino output
         self.publisher = self.create_publisher(String,'arduino_output', 10)
-        timer_period = 0.01975  # seconds
+        timer_period = 0.008  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
 

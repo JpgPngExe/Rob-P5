@@ -1,0 +1,26 @@
+[0.488s] Invoking command in '/home/valdemar-linus/p5/Rob-P5/ros2_ws/src/arduino_output': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/arduino_output build --build-base /home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/build install --record /home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/install.log --install-scripts $base/lib/arduino_output --single-version-externally-managed install_data
+[0.651s] running egg_info
+[0.662s] writing ../../build/arduino_output/arduino_output.egg-info/PKG-INFO
+[0.662s] writing dependency_links to ../../build/arduino_output/arduino_output.egg-info/dependency_links.txt
+[0.662s] writing entry points to ../../build/arduino_output/arduino_output.egg-info/entry_points.txt
+[0.663s] writing requirements to ../../build/arduino_output/arduino_output.egg-info/requires.txt
+[0.663s] writing top-level names to ../../build/arduino_output/arduino_output.egg-info/top_level.txt
+[0.685s] reading manifest file '../../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.686s] adding license file 'LICENSE'
+[0.686s] writing manifest file '../../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.686s] running build
+[0.686s] running build_py
+[0.686s] copying arduino_output/arduino_ros_test.py -> /home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/build/lib/arduino_output
+[0.686s] running install
+[0.690s] running install_lib
+[0.701s] copying /home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/build/lib/arduino_output/arduino_ros_test.py -> /home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages/arduino_output
+[0.702s] byte-compiling /home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages/arduino_output/arduino_ros_test.py to arduino_ros_test.cpython-312.pyc
+[0.702s] running install_data
+[0.702s] running install_egg_info
+[0.715s] removing '/home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info' (and everything under it)
+[0.715s] Copying ../../build/arduino_output/arduino_output.egg-info to /home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info
+[0.715s] running install_scripts
+[0.791s] Installing arduino_talker script to /home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/arduino_output
+[0.791s] Installing test_listener script to /home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/arduino_output
+[0.791s] writing list of installed files to '/home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/install.log'
+[0.811s] Invoked command in '/home/valdemar-linus/p5/Rob-P5/ros2_ws/src/arduino_output' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/valdemar-linus/p5/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/arduino_output build --build-base /home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/build install --record /home/valdemar-linus/p5/Rob-P5/ros2_ws/build/arduino_output/install.log --install-scripts $base/lib/arduino_output --single-version-externally-managed install_data
