@@ -304,19 +304,67 @@ void loop() {
       //      Serial.println(q2.z);
       //  #endif
         
-        #ifdef OUTPUT_READABLE_QUATERNION
-            // display quaternion values in easy matrix form: w x y z
+        
+        
+        #ifdef OUTPUT_READABLE_QUATERNION //Beregner quaternioner til relativ vinkel (aksen kan ændres ved at ændre z til x eller y)
+
+            // Get quaternions from both IMUs
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu2.dmpGetQuaternion(&q2, fifoBuffer2);
-            Serial.print("quat_N\t");
-            Serial.print(q.w-q2.w);
-            Serial.print("\t");
-            Serial.print(q.x-q2.x);
-            Serial.print("\t");
-            Serial.print(q.y-q2.y);
-            Serial.print("\t");
-            Serial.println(q.z-q2.z);
+
+            // Normalize both quaternions
+            q.normalize();
+            q2.normalize();
+
+            // Inverse of reference quaternion (IMU 1, 0x68)
+            Quaternion qInv(q.w, -q.x, -q.y, -q.z);
+
+            // Calculate relative quaternion: qInv * q2
+            Quaternion qRel;
+
+            qRel.w = qInv.w*q2.w - qInv.x*q2.x
+                - qInv.y*q2.y - qInv.z*q2.z;
+
+            qRel.x = qInv.w*q2.x + qInv.x*q2.w
+                + qInv.y*q2.z - qInv.z*q2.y;
+
+            qRel.y = qInv.w*q2.y - qInv.x*q2.z
+                + qInv.y*q2.w + qInv.z*q2.x;
+
+            qRel.z = qInv.w*q2.z + qInv.x*q2.y
+                - qInv.y*q2.x + qInv.z*q2.w;
+
+            // Diagnostic: individual axis twist angles (aksen som bliver output kan ændres i angle1, angle2 og angleRel ved at ændre *.z, y eller z)
+            float angle1 = 2.0 * atan2(q.z, q.w) * 180.0 / PI;
+            float angle2 = 2.0 * atan2(q2.z, q2.w) * 180.0 / PI;
+
+            // Diagnostic: relative X-axis twist angle
+            float angleRel = 2.0 * atan2(qRel.z, qRel.w)
+                        * 180.0 / PI;
+
+            // Normalize angles to [-180, 180]
+            if (angle1 > 180.0) angle1 -= 360.0;
+            if (angle1 < -180.0) angle1 += 360.0;
+
+            if (angle2 > 180.0) angle2 -= 360.0;
+            if (angle2 < -180.0) angle2 += 360.0;
+
+            if (angleRel > 180.0) angleRel -= 360.0;
+            if (angleRel < -180.0) angleRel += 360.0;
+
+            // Print diagnostic measurements
+            Serial.print("IMU1: ");
+            Serial.print(angle1);
+
+            Serial.print(" | IMU2: ");
+            Serial.print(angle2);
+
+            Serial.print(" | Relative: ");
+            Serial.println(angleRel);
+
         #endif
+
+
 
 
         #ifdef OUTPUT_READABLE_EULER
