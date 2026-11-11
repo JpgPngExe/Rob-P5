@@ -1,4 +1,3 @@
-
 // I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class using DMP (MotionApps v2.0)
 // 6/21/2012 by Jeff Rowberg <jeff@rowberg.net>
 // Updates should (hopefully) always be available at https://github.com/jrowberg/i2cdevlib
@@ -48,7 +47,6 @@ THE SOFTWARE.
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
 #include "I2Cdev.h"
-#include <ESP32Time.h>
 
 #include "MPU6050_6Axis_MotionApps20.h"
 //#include "MPU6050.h" // not necessary if using MotionApps include file
@@ -119,7 +117,7 @@ MPU6050 mpu2(0x69); // <-- use for AD0 high
 
 // uncomment "OUTPUT_TEAPOT" if you want output that matches the
 // format used for the InvenSense teapot demo
-//define OUTPUT_TEAPOT
+//#define OUTPUT_TEAPOT
 
 
 
@@ -153,6 +151,7 @@ float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gra
 uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\n' };
 
 
+
 // ================================================================
 // ===               INTERRUPT DETECTION ROUTINE                ===
 // ================================================================
@@ -171,10 +170,10 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\
 void setup() {
     // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
+    
         Wire.begin(1,2);
-        Wire.setClock(400000);// 400kHz I2C clock. Comment this line if having compilation difficulties
-        Wire.setTimeout(5);
-   
+        Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
+        Wire.setTimeout(25);
     #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
         Fastwire::setup(400, true);
     #endif
@@ -201,7 +200,7 @@ void setup() {
     Serial.println(F("Testing device connections..."));
     Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
     Serial.println(mpu2.testConnection() ? F("MPU6050 2 connection successful") : F("MPU6050 connection failed"));
-            
+
     // wait for ready
     //Serial.println(F("\nSend any character to begin DMP programming and demo: "));
     //while (Serial.available() && Serial.read()); // empty buffer
@@ -210,32 +209,31 @@ void setup() {
 
     // load and configure the DMP
     Serial.println(F("Initializing DMP..."));
-    
-    devStatus = mpu.dmpInitialize();
     devStatus2 = mpu2.dmpInitialize();
-    
-    // supply your own gyro offsets here, scaled for min sensitivity
-    mpu.setXGyroOffset(70);
-    mpu.setYGyroOffset(18);
-    mpu.setZGyroOffset(19);
-    mpu.setZAccelOffset(2411); // 1688 factory default for my test chip
+    devStatus = mpu.dmpInitialize();
 
     // supply your own gyro offsets here, scaled for min sensitivity
-    mpu2.setXGyroOffset(75);
-    mpu2.setYGyroOffset(-49);
-    mpu2.setZGyroOffset(3);
-    mpu2.setZAccelOffset(2133); // 1688 factory default for my test chip
+    mpu.setXGyroOffset(73);
+    mpu.setYGyroOffset(-53);
+    mpu.setZGyroOffset(8);
+    mpu.setZAccelOffset(2585); // 1688 factory default for my test chip
+
+    // supply your own gyro offsets here, scaled for min sensitivity
+    mpu2.setXGyroOffset(70);
+    mpu2.setYGyroOffset(19);
+    mpu2.setZGyroOffset(19);
+    mpu2.setZAccelOffset(4333); // 1688 factory default for my test chip
 
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
         // Calibration Time: generate offsets and calibrate our MPU6050
-        mpu.CalibrateAccel(15);
-        mpu.CalibrateGyro(15);
+        mpu.CalibrateAccel(6);
+        mpu.CalibrateGyro(6);
         mpu.PrintActiveOffsets();
 
         // Calibration Time: generate offsets and calibrate our MPU6050
-        mpu2.CalibrateAccel(15);
-        mpu2.CalibrateGyro(15);
+        mpu2.CalibrateAccel(6);
+        mpu2.CalibrateGyro(6);
         mpu2.PrintActiveOffsets();
         // turn on the DMP, now that it's ready
         Serial.println(F("Enabling DMP..."));
@@ -264,7 +262,7 @@ void setup() {
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
         Serial.print(F("DMP Initialization failed (code "));
-        Serial.println(devStatus);
+        Serial.print(devStatus);
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus2);
         Serial.println(F(")"));
@@ -366,11 +364,7 @@ void loop() {
             Serial.print(angle2);
 
             Serial.print(" | Relative: ");
-            Serial.print(angleRel);
-
-            Serial.print(" | Time: ");
-            Serial.println(millis());
- 
+            Serial.println(angleRel);
 
         #endif
 
