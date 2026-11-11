@@ -1,0 +1,24 @@
+services:
+   ros2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rg5544:latest
+    network_mode: host
+    ipc: host
+    stdin_open: true
+    tty: true
+    volumes: 
+        - ../ros2_ws:/workspace
+          
+    privileged: true
+    working_dir: /workspace
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev/ttyACM0
+   
+
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - ROS_DOMAIN_ID=30
+      - ROS_LOCALHOST_ONLY=0
