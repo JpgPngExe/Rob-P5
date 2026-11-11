@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "CANdle-SDK/commons/googletest/googlemock",
+		"source" : "CANdle-SDK/commons/googletest/googlemock"
+	}
+}

@@ -1,0 +1,6 @@
+source;share/exoskeleton/hook/pythonpath.ps1
+source;share/exoskeleton/hook/pythonpath.dsv
+source;share/exoskeleton/hook/pythonpath.sh
+source;share/exoskeleton/hook/ament_prefix_path.ps1
+source;share/exoskeleton/hook/ament_prefix_path.dsv
+source;share/exoskeleton/hook/ament_prefix_path.sh

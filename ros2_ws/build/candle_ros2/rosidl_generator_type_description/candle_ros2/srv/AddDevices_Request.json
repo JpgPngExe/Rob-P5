@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "candle_ros2/srv/AddDevices_Request",
+      "fields": [
+        {
+          "name": "device_ids",
+          "type": {
+            "type_id": 149,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "candle_ros2/srv/AddDevices_Request",
+      "hash_string": "RIHS01_4ac99730920dea9268b838933f6d198b7074e6ad5f09a15cb2ec53f2532d1b98"
+    }
+  ]
+}

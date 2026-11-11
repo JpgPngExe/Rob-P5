@@ -1,0 +1,45 @@
+[0.662s] Invoking command in '/workspace/src/exoskeleton': PYTHONPATH=/workspace/build/exoskeleton/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/workspace/install/exoskeleton/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/exoskeleton build --build-base /workspace/build/exoskeleton/build install --record /workspace/build/exoskeleton/install.log --install-scripts $base/lib/exoskeleton --single-version-externally-managed install_data
+[0.807s] running egg_info
+[0.807s] creating ../../build/exoskeleton/exoskeleton.egg-info
+[0.816s] writing ../../build/exoskeleton/exoskeleton.egg-info/PKG-INFO
+[0.816s] writing dependency_links to ../../build/exoskeleton/exoskeleton.egg-info/dependency_links.txt
+[0.816s] writing entry points to ../../build/exoskeleton/exoskeleton.egg-info/entry_points.txt
+[0.816s] writing requirements to ../../build/exoskeleton/exoskeleton.egg-info/requires.txt
+[0.816s] writing top-level names to ../../build/exoskeleton/exoskeleton.egg-info/top_level.txt
+[0.816s] writing manifest file '../../build/exoskeleton/exoskeleton.egg-info/SOURCES.txt'
+[0.834s] reading manifest file '../../build/exoskeleton/exoskeleton.egg-info/SOURCES.txt'
+[0.834s] writing manifest file '../../build/exoskeleton/exoskeleton.egg-info/SOURCES.txt'
+[0.834s] running build
+[0.834s] running build_py
+[0.835s] creating /workspace/build/exoskeleton/build
+[0.835s] creating /workspace/build/exoskeleton/build/lib
+[0.835s] creating /workspace/build/exoskeleton/build/lib/exoskeleton
+[0.835s] copying exoskeleton/admittance.py -> /workspace/build/exoskeleton/build/lib/exoskeleton
+[0.835s] copying exoskeleton/__init__.py -> /workspace/build/exoskeleton/build/lib/exoskeleton
+[0.835s] copying exoskeleton/setup_node.py -> /workspace/build/exoskeleton/build/lib/exoskeleton
+[0.835s] copying exoskeleton/feature_extraction.py -> /workspace/build/exoskeleton/build/lib/exoskeleton
+[0.835s] running install
+[0.839s] running install_lib
+[0.852s] creating /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+[0.852s] copying /workspace/build/exoskeleton/build/lib/exoskeleton/admittance.py -> /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+[0.852s] copying /workspace/build/exoskeleton/build/lib/exoskeleton/__init__.py -> /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+[0.852s] copying /workspace/build/exoskeleton/build/lib/exoskeleton/setup_node.py -> /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+[0.852s] copying /workspace/build/exoskeleton/build/lib/exoskeleton/feature_extraction.py -> /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+[0.853s] byte-compiling /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/admittance.py to admittance.cpython-312.pyc
+[0.854s] byte-compiling /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/__init__.py to __init__.cpython-312.pyc
+[0.854s] byte-compiling /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/setup_node.py to setup_node.cpython-312.pyc
+[0.855s] byte-compiling /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/feature_extraction.py to feature_extraction.cpython-312.pyc
+[0.856s] running install_data
+[0.857s] creating /workspace/install/exoskeleton/share/ament_index
+[0.857s] creating /workspace/install/exoskeleton/share/ament_index/resource_index
+[0.857s] creating /workspace/install/exoskeleton/share/ament_index/resource_index/packages
+[0.857s] copying resource/exoskeleton -> /workspace/install/exoskeleton/share/ament_index/resource_index/packages
+[0.857s] copying package.xml -> /workspace/install/exoskeleton/share/exoskeleton
+[0.857s] running install_egg_info
+[0.870s] Copying ../../build/exoskeleton/exoskeleton.egg-info to /workspace/install/exoskeleton/lib/python3.12/site-packages/exoskeleton-0.0.1-py3.12.egg-info
+[0.871s] running install_scripts
+[0.940s] Installing admittance script to /workspace/install/exoskeleton/lib/exoskeleton
+[0.941s] Installing feature_extraction script to /workspace/install/exoskeleton/lib/exoskeleton
+[0.941s] Installing setup script to /workspace/install/exoskeleton/lib/exoskeleton
+[0.941s] writing list of installed files to '/workspace/build/exoskeleton/install.log'
+[0.961s] Invoked command in '/workspace/src/exoskeleton' returned '0': PYTHONPATH=/workspace/build/exoskeleton/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/workspace/install/exoskeleton/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/exoskeleton build --build-base /workspace/build/exoskeleton/build install --record /workspace/build/exoskeleton/install.log --install-scripts $base/lib/exoskeleton --single-version-externally-managed install_data

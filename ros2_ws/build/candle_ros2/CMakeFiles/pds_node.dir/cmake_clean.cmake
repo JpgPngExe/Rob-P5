@@ -1,0 +1,19 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/pds_node.dir/src/pds_modules/brake_resistor_ros.cpp.o"
+  "CMakeFiles/pds_node.dir/src/pds_modules/brake_resistor_ros.cpp.o.d"
+  "CMakeFiles/pds_node.dir/src/pds_modules/control_module_ros.cpp.o"
+  "CMakeFiles/pds_node.dir/src/pds_modules/control_module_ros.cpp.o.d"
+  "CMakeFiles/pds_node.dir/src/pds_modules/isolated_converter_ros.cpp.o"
+  "CMakeFiles/pds_node.dir/src/pds_modules/isolated_converter_ros.cpp.o.d"
+  "CMakeFiles/pds_node.dir/src/pds_modules/power_stage_ros.cpp.o"
+  "CMakeFiles/pds_node.dir/src/pds_modules/power_stage_ros.cpp.o.d"
+  "CMakeFiles/pds_node.dir/src/pds_node.cpp.o"
+  "CMakeFiles/pds_node.dir/src/pds_node.cpp.o.d"
+  "libpds_node.a"
+  "libpds_node.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/pds_node.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

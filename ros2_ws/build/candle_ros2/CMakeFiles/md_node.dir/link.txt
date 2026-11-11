@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmd_node.a CMakeFiles/md_node.dir/src/md_node.cpp.o
+/usr/bin/ranlib libmd_node.a

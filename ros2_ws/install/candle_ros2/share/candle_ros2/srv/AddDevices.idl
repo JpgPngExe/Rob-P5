@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from candle_ros2/srv/AddDevices.srv
+// generated code does not contain a copyright notice
+
+
+module candle_ros2 {
+  module srv {
+    @verbatim (language="comment", text=
+      "Service adds MAB devices to the node")
+    struct AddDevices_Request {
+      @verbatim (language="comment", text=
+        "Device IDs")
+      sequence<uint16> device_ids;
+    };
+    struct AddDevices_Response {
+      @verbatim (language="comment", text=
+        "Success status for each device")
+      sequence<boolean> success;
+
+      @verbatim (language="comment", text=
+        "Total number of devices")
+      uint16 total_devices;
+    };
+  };
+};

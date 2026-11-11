@@ -1,0 +1,14 @@
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/ImpedanceCmd.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/MotionCmd.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/Pid.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/VelocityPidCmd.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/PositionPidCmd.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/BrakeResistorData.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/ControlModuleData.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/IsolatedConverterData.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:msg/PowerStageData.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:srv/AddDevices.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:srv/Generic.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:srv/GenericPds.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:srv/SetLimits.idl
+/workspace/build/candle_ros2/rosidl_adapter/candle_ros2:srv/SetMode.idl

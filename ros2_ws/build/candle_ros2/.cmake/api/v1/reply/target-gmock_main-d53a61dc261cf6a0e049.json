@@ -1,0 +1,343 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "lib/libgmock_main.so"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"cxx_library_with_type",
+			"cxx_library",
+			"target_link_libraries",
+			"add_compile_options",
+			"add_compile_definitions",
+			"set_target_properties",
+			"add_definitions",
+			"include",
+			"find_package",
+			"ament_execute_extensions",
+			"rosidl_generate_interfaces",
+			"include_directories",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"CANdle-SDK/commons/googletest/googletest/cmake/internal_utils.cmake",
+			"CANdle-SDK/commons/googletest/googlemock/CMakeLists.txt",
+			"CMakeLists.txt",
+			"CANdle-SDK/CMakeLists.txt",
+			"/opt/ros/jazzy/share/ament_cmake_ros/cmake/ament_cmake_ros-extras.cmake",
+			"/opt/ros/jazzy/share/ament_cmake_ros/cmake/ament_cmake_rosConfig.cmake",
+			"/opt/ros/jazzy/share/rosidl_typesupport_fastrtps_c/cmake/rosidl_typesupport_fastrtps_c_generate_interfaces.cmake",
+			"/opt/ros/jazzy/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake",
+			"/opt/ros/jazzy/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 100,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 210,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 165,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 101,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 98,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 18,
+				"parent" : 6
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 43,
+				"parent" : 8
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 47,
+				"parent" : 8
+			},
+			{
+				"command" : 5,
+				"file" : 3,
+				"line" : 12,
+				"parent" : 8
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 188,
+				"parent" : 2
+			},
+			{
+				"command" : 11,
+				"file" : 2,
+				"line" : 48,
+				"parent" : 6
+			},
+			{
+				"command" : 10,
+				"file" : 8,
+				"line" : 280,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 7,
+				"line" : 48,
+				"parent" : 14
+			},
+			{
+				"file" : 6,
+				"parent" : 15
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 21,
+				"parent" : 16
+			},
+			{
+				"file" : 5,
+				"parent" : 17
+			},
+			{
+				"command" : 8,
+				"file" : 5,
+				"line" : 41,
+				"parent" : 18
+			},
+			{
+				"file" : 4,
+				"parent" : 19
+			},
+			{
+				"command" : 7,
+				"file" : 4,
+				"line" : 25,
+				"parent" : 20
+			},
+			{
+				"command" : 5,
+				"file" : 3,
+				"line" : 48,
+				"parent" : 8
+			},
+			{
+				"command" : 12,
+				"file" : 1,
+				"line" : 75,
+				"parent" : 0
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 198,
+				"parent" : 2
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-std=c++20 -fPIC"
+				},
+				{
+					"fragment" : "-Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wextra"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wpedantic"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wfatal-errors"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wno-unused-parameter"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wno-missing-field-initializers"
+				},
+				{
+					"backtrace" : 10,
+					"fragment" : "-Werror"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 11,
+					"define" : "CANDLESDK_VERSION=\"1.3.1\""
+				},
+				{
+					"backtrace" : 12,
+					"define" : "GTEST_CREATE_SHARED_LIBRARY=1"
+				},
+				{
+					"backtrace" : 21,
+					"define" : "ROS_PACKAGE_NAME=\"candle_ros2\""
+				},
+				{
+					"backtrace" : 22,
+					"define" : "WIN32_MEAN_AND_LEAN"
+				},
+				{
+					"define" : "gmock_main_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 23,
+					"isSystem" : true,
+					"path" : "/workspace/src/candle_ros2/CANdle-SDK/commons/googletest/googlemock/include"
+				},
+				{
+					"backtrace" : 23,
+					"isSystem" : true,
+					"path" : "/workspace/src/candle_ros2/CANdle-SDK/commons/googletest/googlemock"
+				},
+				{
+					"backtrace" : 23,
+					"isSystem" : true,
+					"path" : "/workspace/src/candle_ros2/CANdle-SDK/commons/googletest/googletest/include"
+				},
+				{
+					"backtrace" : 23,
+					"isSystem" : true,
+					"path" : "/workspace/src/candle_ros2/CANdle-SDK/commons/googletest/googletest"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					24
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "gmock::@2dc5c35468af52ec42f5"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "gtest::@2d91a562aa5ec078eb1c"
+		}
+	],
+	"id" : "gmock_main::@2dc5c35468af52ec42f5",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/workspace/build/candle_ros2/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "../../../../lib/libgmock.so.1.15.0",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../../../lib/libgtest.so.1.15.0",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "gmock_main",
+	"nameOnDisk" : "libgmock_main.so",
+	"paths" : 
+	{
+		"build" : "CANdle-SDK/commons/googletest/googlemock",
+		"source" : "CANdle-SDK/commons/googletest/googlemock"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "CANdle-SDK/commons/googletest/googlemock/src/gmock_main.cc",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from candle_ros2/srv/SetMode.srv
+// generated code does not contain a copyright notice
+
+
+module candle_ros2 {
+  module srv {
+    @verbatim (language="comment", text=
+      "Service sets motion mode for MD devices")
+    struct SetMode_Request {
+      @verbatim (language="comment", text=
+        "Device IDs")
+      sequence<uint16> device_ids;
+
+      @verbatim (language="comment", text=
+        "Mode for each device: \"IMPEDANCE\", \"POSITION_PID\", \"VELOCITY_PID\", \"RAW_TORQUE\"")
+      sequence<string> mode;
+    };
+    struct SetMode_Response {
+      @verbatim (language="comment", text=
+        "Success status for each device")
+      sequence<boolean> success;
+    };
+  };
+};

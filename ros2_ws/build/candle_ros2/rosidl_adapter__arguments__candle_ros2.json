@@ -1,0 +1,19 @@
+{
+  "package_name": "candle_ros2",
+  "non_idl_tuples": [
+    "/workspace/src/candle_ros2:msg/ImpedanceCmd.msg",
+    "/workspace/src/candle_ros2:msg/MotionCmd.msg",
+    "/workspace/src/candle_ros2:msg/Pid.msg",
+    "/workspace/src/candle_ros2:msg/VelocityPidCmd.msg",
+    "/workspace/src/candle_ros2:msg/PositionPidCmd.msg",
+    "/workspace/src/candle_ros2:msg/BrakeResistorData.msg",
+    "/workspace/src/candle_ros2:msg/ControlModuleData.msg",
+    "/workspace/src/candle_ros2:msg/IsolatedConverterData.msg",
+    "/workspace/src/candle_ros2:msg/PowerStageData.msg",
+    "/workspace/src/candle_ros2:srv/AddDevices.srv",
+    "/workspace/src/candle_ros2:srv/Generic.srv",
+    "/workspace/src/candle_ros2:srv/GenericPds.srv",
+    "/workspace/src/candle_ros2:srv/SetLimits.srv",
+    "/workspace/src/candle_ros2:srv/SetMode.srv"
+  ]
+}

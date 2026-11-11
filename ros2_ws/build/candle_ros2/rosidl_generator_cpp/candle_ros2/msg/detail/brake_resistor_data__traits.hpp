@@ -1,0 +1,166 @@
+// generated from rosidl_generator_cpp/resource/idl__traits.hpp.em
+// with input from candle_ros2:msg/BrakeResistorData.idl
+// generated code does not contain a copyright notice
+
+// IWYU pragma: private, include "candle_ros2/msg/brake_resistor_data.hpp"
+
+
+#ifndef CANDLE_ROS2__MSG__DETAIL__BRAKE_RESISTOR_DATA__TRAITS_HPP_
+#define CANDLE_ROS2__MSG__DETAIL__BRAKE_RESISTOR_DATA__TRAITS_HPP_
+
+#include <stdint.h>
+
+#include <sstream>
+#include <string>
+#include <type_traits>
+
+#include "candle_ros2/msg/detail/brake_resistor_data__struct.hpp"
+#include "rosidl_runtime_cpp/traits.hpp"
+
+// Include directives for member types
+// Member 'header'
+#include "std_msgs/msg/detail/header__traits.hpp"
+
+namespace candle_ros2
+{
+
+namespace msg
+{
+
+inline void to_flow_style_yaml(
+  const BrakeResistorData & msg,
+  std::ostream & out)
+{
+  out << "{";
+  // member: header
+  {
+    out << "header: ";
+    to_flow_style_yaml(msg.header, out);
+    out << ", ";
+  }
+
+  // member: enabled
+  {
+    out << "enabled: ";
+    rosidl_generator_traits::value_to_yaml(msg.enabled, out);
+    out << ", ";
+  }
+
+  // member: temperature
+  {
+    out << "temperature: ";
+    rosidl_generator_traits::value_to_yaml(msg.temperature, out);
+    out << ", ";
+  }
+
+  // member: temperature_limit
+  {
+    out << "temperature_limit: ";
+    rosidl_generator_traits::value_to_yaml(msg.temperature_limit, out);
+  }
+  out << "}";
+}  // NOLINT(readability/fn_size)
+
+inline void to_block_style_yaml(
+  const BrakeResistorData & msg,
+  std::ostream & out, size_t indentation = 0)
+{
+  // member: header
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "header:\n";
+    to_block_style_yaml(msg.header, out, indentation + 2);
+  }
+
+  // member: enabled
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "enabled: ";
+    rosidl_generator_traits::value_to_yaml(msg.enabled, out);
+    out << "\n";
+  }
+
+  // member: temperature
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "temperature: ";
+    rosidl_generator_traits::value_to_yaml(msg.temperature, out);
+    out << "\n";
+  }
+
+  // member: temperature_limit
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "temperature_limit: ";
+    rosidl_generator_traits::value_to_yaml(msg.temperature_limit, out);
+    out << "\n";
+  }
+}  // NOLINT(readability/fn_size)
+
+inline std::string to_yaml(const BrakeResistorData & msg, bool use_flow_style = false)
+{
+  std::ostringstream out;
+  if (use_flow_style) {
+    to_flow_style_yaml(msg, out);
+  } else {
+    to_block_style_yaml(msg, out);
+  }
+  return out.str();
+}
+
+}  // namespace msg
+
+}  // namespace candle_ros2
+
+namespace rosidl_generator_traits
+{
+
+[[deprecated("use candle_ros2::msg::to_block_style_yaml() instead")]]
+inline void to_yaml(
+  const candle_ros2::msg::BrakeResistorData & msg,
+  std::ostream & out, size_t indentation = 0)
+{
+  candle_ros2::msg::to_block_style_yaml(msg, out, indentation);
+}
+
+[[deprecated("use candle_ros2::msg::to_yaml() instead")]]
+inline std::string to_yaml(const candle_ros2::msg::BrakeResistorData & msg)
+{
+  return candle_ros2::msg::to_yaml(msg);
+}
+
+template<>
+inline const char * data_type<candle_ros2::msg::BrakeResistorData>()
+{
+  return "candle_ros2::msg::BrakeResistorData";
+}
+
+template<>
+inline const char * name<candle_ros2::msg::BrakeResistorData>()
+{
+  return "candle_ros2/msg/BrakeResistorData";
+}
+
+template<>
+struct has_fixed_size<candle_ros2::msg::BrakeResistorData>
+  : std::integral_constant<bool, has_fixed_size<std_msgs::msg::Header>::value> {};
+
+template<>
+struct has_bounded_size<candle_ros2::msg::BrakeResistorData>
+  : std::integral_constant<bool, has_bounded_size<std_msgs::msg::Header>::value> {};
+
+template<>
+struct is_message<candle_ros2::msg::BrakeResistorData>
+  : std::true_type {};
+
+}  // namespace rosidl_generator_traits
+
+#endif  // CANDLE_ROS2__MSG__DETAIL__BRAKE_RESISTOR_DATA__TRAITS_HPP_

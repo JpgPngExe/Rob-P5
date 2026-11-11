@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "candle_ros2/srv/Generic_Response",
+      "fields": [
+        {
+          "name": "success",
+          "type": {
+            "type_id": 159,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "candle_ros2/srv/Generic_Response",
+      "hash_string": "RIHS01_8b91c0e3cfe8fb4b8d0f806de8f85c3c6df7e4cf64fadb7ca9c0d8a422a33ea3"
+    }
+  ]
+}

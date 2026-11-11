@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from candle_ros2/msg/ControlModuleData.msg
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/Header.idl"
+
+module candle_ros2 {
+  module msg {
+    struct ControlModuleData {
+      std_msgs::msg::Header header;
+
+      uint32 bus_voltage;
+
+      uint32 battery_voltage_level_1;
+
+      uint32 battery_voltage_level_2;
+
+      uint32 brake_trigger_voltage;
+
+      float temperature;
+
+      float temperature_limit;
+    };
+  };
+};

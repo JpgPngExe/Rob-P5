@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from candle_ros2/msg/ImpedanceCmd.msg
+// generated code does not contain a copyright notice
+
+
+module candle_ros2 {
+  module msg {
+    @verbatim (language="comment", text=
+      "Message holds impedance PD controller parameters for MD controllers")
+    struct ImpedanceCmd {
+      @verbatim (language="comment", text=
+        "Device IDs")
+      sequence<uint16> device_ids;
+
+      sequence<float> kp;
+
+      sequence<float> kd;
+
+      sequence<float> max_output;
+    };
+  };
+};

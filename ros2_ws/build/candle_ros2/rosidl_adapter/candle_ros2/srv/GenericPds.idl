@@ -1,0 +1,19 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from candle_ros2/srv/GenericPds.srv
+// generated code does not contain a copyright notice
+
+
+module candle_ros2 {
+  module srv {
+    @verbatim (language="comment", text=
+      "Generic MAB Candle ROS2 service for PDS devices")
+    struct GenericPds_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct GenericPds_Response {
+      @verbatim (language="comment", text=
+        "Success status for each device")
+      sequence<boolean> success;
+    };
+  };
+};
