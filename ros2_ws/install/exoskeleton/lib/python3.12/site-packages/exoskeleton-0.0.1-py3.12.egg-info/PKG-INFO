@@ -1,8 +1,0 @@
-Metadata-Version: 2.1
-Name: exoskeleton
-Version: 0.0.1
-Summary: TODO: ROS2 package for ROB5 exoskeleton project
-Maintainer: rg5-544
-Maintainer-email: rg5-544@todo.todo
-License: TODO: Apache License 2.0
-Provides-Extra: test
