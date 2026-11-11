@@ -7,7 +7,8 @@
   <maintainer email="valdemar@kaasgaard.dk">valdemar-linus</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend> 
+  <exec_depend>message_filters</exec_depend>
   <exec_depend>python3_pyserial</exec_depend>
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
