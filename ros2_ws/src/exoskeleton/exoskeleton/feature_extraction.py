@@ -6,13 +6,23 @@ from interfaces.msg import MultiArray
 class Feature_extraction(Node):
     def __init__(self):
         super().__init__('Feature_extraction_Node')
-        self.data_subscriber = self.create_subscription(MultiArray, '/Processed_EMG',self.emg_callback, 10)
-        timer_period = 0.05
-        self.extract_features = self.create_timer(timer_period, self.publish_features)
-        self.feature_publisher = self.create_publisher(MultiArray, '/Extracted_features',10)
+        self.declare_parameter("Extraction rate", 0.1)
+        self.declare_parameter("Wamp_threshold", 1)
+        self.declare_parameter("ssc_threshold", 1)
+        self.declare_parameter("Processed_EMG", "/Processed_EMG")
+        self.declare_parameter("Extracted_features", "/Extracted_features")
+        
+        self.timer_period = self.get_parameter("Extraction_rate").value
+        self.wamp_threshold = self.get_parameter("Wamp_threshold").value
+        self.ssc_threshold = self.get_parameter("ssc_threshold").value
+        self.data_input = self.get_parameter("Processed_EMG").value
+        self.data_output = self.get_parameter("Extracted_features").value
+        
+        self.data_subscriber = self.create_subscription(MultiArray, self.data_input, self.emg_callback, 10)
+        self.feature_timer = self.create_timer(self.timer_period, self.publish_features)
+        self.feature_publisher = self.create_publisher(MultiArray, self.data_output,10)
         self.features = None
-        self.wamp_threshold = 1
-        self.ssc_threshold = 1
+        
         self.get_logger().info("Feature Extraction Node Initiated succesfully")
 
     def restructure_data(self, msg):
@@ -56,8 +66,6 @@ class Feature_extraction(Node):
             self.get_logger().error("Failed to publish message")
             self.get_logger().error(f"Error: {e}")
             raise
-
-        
 
     def feature_extraction(self,window):
         features = np.zeros((window.shape[0], 4))

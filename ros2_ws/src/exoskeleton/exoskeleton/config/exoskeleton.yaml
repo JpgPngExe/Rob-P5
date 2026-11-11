@@ -1,0 +1,20 @@
+Admittance:
+  ros__parameters:
+      Virtual_mass: 1.0
+      Base_K: 0.1
+      Max_K: 5.0
+      Controller_update_rate: 0.1
+      Range_of_motion: [-100,100]
+      Quality_of_service: 10
+      ROM_buffer: 15
+      Factor_coefficient: 0.5
+      Motion_command_topic: "/md/motion_command"
+      Torque_estimator: "/Torque_estimator"
+
+Feature_extraction:
+  ros__parameters:
+    Extraction_rate: 0.1
+    Wamp_threshold: 1
+    ssc_threshold: 1
+    Processed_EMG: "/Processed_EMG"
+    Extracted_features: "/Extracted_features"
