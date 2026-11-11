@@ -1,0 +1,22 @@
+[0.649s] Invoking command in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/arduino_output': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/arduino_output build --build-base /home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/build install --record /home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/install.log --single-version-externally-managed install_data
+[0.813s] running egg_info
+[0.824s] writing ../../build/arduino_output/arduino_output.egg-info/PKG-INFO
+[0.824s] writing dependency_links to ../../build/arduino_output/arduino_output.egg-info/dependency_links.txt
+[0.824s] writing entry points to ../../build/arduino_output/arduino_output.egg-info/entry_points.txt
+[0.824s] writing requirements to ../../build/arduino_output/arduino_output.egg-info/requires.txt
+[0.824s] writing top-level names to ../../build/arduino_output/arduino_output.egg-info/top_level.txt
+[0.847s] reading manifest file '../../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.847s] adding license file 'LICENSE'
+[0.847s] writing manifest file '../../build/arduino_output/arduino_output.egg-info/SOURCES.txt'
+[0.847s] running build
+[0.847s] running build_py
+[0.848s] running install
+[0.851s] running install_lib
+[0.862s] running install_data
+[0.862s] running install_egg_info
+[0.874s] removing '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info' (and everything under it)
+[0.874s] Copying ../../build/arduino_output/arduino_output.egg-info to /home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages/arduino_output-0.0.0-py3.12.egg-info
+[0.874s] running install_scripts
+[0.950s] Installing arduino_talker script to /home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/arduino_output
+[0.950s] Installing test_listener script to /home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/arduino_output
+[0.950s] writing list of installed files to '/home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/install.log'

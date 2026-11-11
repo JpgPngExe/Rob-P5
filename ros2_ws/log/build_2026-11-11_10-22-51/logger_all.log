@@ -1,0 +1,281 @@
+[0.060s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.061s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7dd5f287bbf0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7dd5f287b3e0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7dd5f287b3e0>>)
+[0.083s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.083s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.083s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.083s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.083s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.083s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.083s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/jacob/Desktop/Rob-P5/ros2_ws'
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.083s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extensions ['ignore', 'ignore_ament_install']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extension 'ignore'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extension 'ignore_ament_install'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extensions ['colcon_pkg']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extension 'colcon_pkg'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extensions ['colcon_meta']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extension 'colcon_meta'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extensions ['ros']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino_output) by extension 'ros'
+[0.101s] DEBUG:colcon.colcon_core.package_identification:Package 'src/arduino_output' with type 'ros.ament_python' and name 'arduino_output'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extensions ['ignore', 'ignore_ament_install']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extension 'ignore'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) ignored
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extensions ['ignore', 'ignore_ament_install']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'ignore'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'ignore_ament_install'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extensions ['colcon_pkg']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'colcon_pkg'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extensions ['colcon_meta']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'colcon_meta'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extensions ['ros']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'ros'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extensions ['cmake', 'python']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'cmake'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'python'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extensions ['python_setup_py']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/candle_ros2) by extension 'python_setup_py'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extensions ['ignore', 'ignore_ament_install']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extension 'ignore'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extension 'ignore_ament_install'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extensions ['colcon_pkg']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extension 'colcon_pkg'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extensions ['colcon_meta']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extension 'colcon_meta'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extensions ['ros']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/exoskeleton) by extension 'ros'
+[0.102s] DEBUG:colcon.colcon_core.package_identification:Package 'src/exoskeleton' with type 'ros.ament_python' and name 'exoskeleton'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extensions ['ignore', 'ignore_ament_install']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extension 'ignore'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) ignored
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extension 'ignore'
+[0.102s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extension 'ignore_ament_install'
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extensions ['colcon_pkg']
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extension 'colcon_pkg'
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extensions ['colcon_meta']
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extension 'colcon_meta'
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extensions ['ros']
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/interfaces) by extension 'ros'
+[0.103s] DEBUG:colcon.colcon_core.package_identification:Package 'src/interfaces' with type 'ros.ament_cmake' and name 'interfaces'
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extension 'ignore'
+[0.103s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) ignored
+[0.103s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.103s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.103s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.103s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.103s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.114s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.114s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.116s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 464 installed packages in /opt/ros/jazzy
+[0.117s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'cmake_target' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'cmake_clean_cache' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'cmake_clean_first' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'cmake_force_configure' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'ament_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'catkin_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'arduino_output' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.148s] DEBUG:colcon.colcon_core.verb:Building package 'arduino_output' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output', 'merge_install': False, 'path': '/home/jacob/Desktop/Rob-P5/ros2_ws/src/arduino_output', 'symlink_install': False, 'test_result_base': None}
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'cmake_target' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'cmake_clean_cache' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'cmake_clean_first' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'cmake_force_configure' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'ament_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'catkin_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'exoskeleton' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.148s] DEBUG:colcon.colcon_core.verb:Building package 'exoskeleton' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton', 'merge_install': False, 'path': '/home/jacob/Desktop/Rob-P5/ros2_ws/src/exoskeleton', 'symlink_install': False, 'test_result_base': None}
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'cmake_target' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.148s] DEBUG:colcon.colcon_core.verb:Building package 'interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces', 'merge_install': False, 'path': '/home/jacob/Desktop/Rob-P5/ros2_ws/src/interfaces', 'symlink_install': False, 'test_result_base': None}
+[0.148s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.149s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.149s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/arduino_output' with build type 'ament_python'
+[0.150s] Level 1:colcon.colcon_core.shell:create_environment_hook('arduino_output', 'ament_prefix_path')
+[0.151s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.151s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/hook/ament_prefix_path.ps1'
+[0.152s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/hook/ament_prefix_path.dsv'
+[0.153s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/hook/ament_prefix_path.sh'
+[0.153s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.153s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.156s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/exoskeleton' with build type 'ament_python'
+[0.157s] Level 1:colcon.colcon_core.shell:create_environment_hook('exoskeleton', 'ament_prefix_path')
+[0.157s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/hook/ament_prefix_path.ps1'
+[0.157s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/hook/ament_prefix_path.dsv'
+[0.158s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/hook/ament_prefix_path.sh'
+[0.158s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.158s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.160s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/interfaces' with build type 'ament_cmake'
+[0.160s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/interfaces'
+[0.161s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.161s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.289s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/arduino_output'
+[0.289s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.290s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.417s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/exoskeleton'
+[0.417s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.417s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.422s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jacob/Desktop/Rob-P5/ros2_ws/src/interfaces -DCMAKE_INSTALL_PREFIX=/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces
+[0.793s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/arduino_output': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/arduino_output build --build-base /home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/build install --record /home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/install.log --single-version-externally-managed install_data
+[0.795s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/exoskeleton': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/exoskeleton build --build-base /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build install --record /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/install.log --single-version-externally-managed install_data
+[1.125s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/arduino_output' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/arduino_output build --build-base /home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/build install --record /home/jacob/Desktop/Rob-P5/ros2_ws/build/arduino_output/install.log --single-version-externally-managed install_data
+[1.126s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output' for CMake module files
+[1.127s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output' for CMake config files
+[1.128s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib'
+[1.128s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/bin'
+[1.128s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/pkgconfig/arduino_output.pc'
+[1.128s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/lib/python3.12/site-packages'
+[1.128s] Level 1:colcon.colcon_core.shell:create_environment_hook('arduino_output', 'pythonpath')
+[1.128s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/hook/pythonpath.ps1'
+[1.129s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/hook/pythonpath.dsv'
+[1.129s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/hook/pythonpath.sh'
+[1.130s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/bin'
+[1.130s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(arduino_output)
+[1.130s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/package.ps1'
+[1.131s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/package.dsv'
+[1.132s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/package.sh'
+[1.132s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/package.bash'
+[1.133s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/arduino_output/package.zsh'
+[1.134s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jacob/Desktop/Rob-P5/ros2_ws/install/arduino_output/share/colcon-core/packages/arduino_output)
+[1.134s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton' for CMake module files
+[1.135s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton' for CMake config files
+[1.135s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jacob/Desktop/Rob-P5/ros2_ws/src/exoskeleton' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/exoskeleton build --build-base /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build install --record /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/install.log --single-version-externally-managed install_data
+[1.136s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib'
+[1.136s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/bin'
+[1.136s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/pkgconfig/exoskeleton.pc'
+[1.136s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages'
+[1.136s] Level 1:colcon.colcon_core.shell:create_environment_hook('exoskeleton', 'pythonpath')
+[1.137s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/hook/pythonpath.ps1'
+[1.137s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/hook/pythonpath.dsv'
+[1.137s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/hook/pythonpath.sh'
+[1.138s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/bin'
+[1.138s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(exoskeleton)
+[1.139s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/package.ps1'
+[1.139s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/package.dsv'
+[1.140s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/package.sh'
+[1.140s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/package.bash'
+[1.140s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton/package.zsh'
+[1.141s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/colcon-core/packages/exoskeleton)
+[2.455s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jacob/Desktop/Rob-P5/ros2_ws/src/interfaces -DCMAKE_INSTALL_PREFIX=/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces
+[2.456s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces -- -j16 -l16
+[3.974s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces -- -j16 -l16
+[3.982s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces
+[4.028s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(interfaces)
+[4.029s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces' for CMake module files
+[4.029s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jacob/Desktop/Rob-P5/ros2_ws/build/interfaces
+[4.029s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces' for CMake config files
+[4.029s] Level 1:colcon.colcon_core.shell:create_environment_hook('interfaces', 'cmake_prefix_path')
+[4.030s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/cmake_prefix_path.ps1'
+[4.030s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/cmake_prefix_path.dsv'
+[4.030s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/cmake_prefix_path.sh'
+[4.030s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/lib'
+[4.030s] Level 1:colcon.colcon_core.shell:create_environment_hook('interfaces', 'ld_library_path_lib')
+[4.030s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/ld_library_path_lib.ps1'
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/ld_library_path_lib.dsv'
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/ld_library_path_lib.sh'
+[4.031s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/bin'
+[4.031s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/lib/pkgconfig/interfaces.pc'
+[4.031s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/lib/python3.12/site-packages'
+[4.031s] Level 1:colcon.colcon_core.shell:create_environment_hook('interfaces', 'pythonpath')
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/pythonpath.ps1'
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/pythonpath.dsv'
+[4.032s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/pythonpath.sh'
+[4.032s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/bin'
+[4.032s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.ps1'
+[4.032s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.dsv'
+[4.033s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.sh'
+[4.033s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.bash'
+[4.033s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.zsh'
+[4.033s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/colcon-core/packages/interfaces)
+[4.033s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(interfaces)
+[4.033s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces' for CMake module files
+[4.034s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces' for CMake config files
+[4.034s] Level 1:colcon.colcon_core.shell:create_environment_hook('interfaces', 'cmake_prefix_path')
+[4.034s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/cmake_prefix_path.ps1'
+[4.034s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/cmake_prefix_path.dsv'
+[4.034s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/cmake_prefix_path.sh'
+[4.035s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/lib'
+[4.035s] Level 1:colcon.colcon_core.shell:create_environment_hook('interfaces', 'ld_library_path_lib')
+[4.035s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/ld_library_path_lib.ps1'
+[4.035s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/ld_library_path_lib.dsv'
+[4.035s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/ld_library_path_lib.sh'
+[4.035s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/bin'
+[4.035s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/lib/pkgconfig/interfaces.pc'
+[4.035s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/lib/python3.12/site-packages'
+[4.035s] Level 1:colcon.colcon_core.shell:create_environment_hook('interfaces', 'pythonpath')
+[4.036s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/pythonpath.ps1'
+[4.036s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/pythonpath.dsv'
+[4.036s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/hook/pythonpath.sh'
+[4.036s] Level 1:colcon.colcon_core.environment:checking '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/bin'
+[4.036s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.ps1'
+[4.037s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.dsv'
+[4.037s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.sh'
+[4.037s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.bash'
+[4.037s] INFO:colcon.colcon_core.shell:Creating package script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/interfaces/package.zsh'
+[4.038s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jacob/Desktop/Rob-P5/ros2_ws/install/interfaces/share/colcon-core/packages/interfaces)
+[4.038s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[4.038s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[4.038s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[4.038s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[4.053s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[4.053s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[4.053s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[4.063s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[4.063s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/local_setup.ps1'
+[4.063s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jacob/Desktop/Rob-P5/ros2_ws/install/_local_setup_util_ps1.py'
+[4.064s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/setup.ps1'
+[4.064s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/local_setup.sh'
+[4.065s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jacob/Desktop/Rob-P5/ros2_ws/install/_local_setup_util_sh.py'
+[4.065s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/setup.sh'
+[4.066s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/local_setup.bash'
+[4.066s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/setup.bash'
+[4.066s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/local_setup.zsh'
+[4.066s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jacob/Desktop/Rob-P5/ros2_ws/install/setup.zsh'

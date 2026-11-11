@@ -1,0 +1,3 @@
+[console_scripts]
+admittance = exoskeleton.admittance:main
+setup = exoskeleton.setup_node:main

@@ -1,0 +1,42 @@
+running egg_info
+creating ../../build/exoskeleton/exoskeleton.egg-info
+writing ../../build/exoskeleton/exoskeleton.egg-info/PKG-INFO
+writing dependency_links to ../../build/exoskeleton/exoskeleton.egg-info/dependency_links.txt
+writing entry points to ../../build/exoskeleton/exoskeleton.egg-info/entry_points.txt
+writing requirements to ../../build/exoskeleton/exoskeleton.egg-info/requires.txt
+writing top-level names to ../../build/exoskeleton/exoskeleton.egg-info/top_level.txt
+writing manifest file '../../build/exoskeleton/exoskeleton.egg-info/SOURCES.txt'
+reading manifest file '../../build/exoskeleton/exoskeleton.egg-info/SOURCES.txt'
+writing manifest file '../../build/exoskeleton/exoskeleton.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton
+copying exoskeleton/admittance.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton
+copying exoskeleton/__init__.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton
+copying exoskeleton/setup_node.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton
+copying exoskeleton/feature_extraction.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton
+running install
+running install_lib
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+copying /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton/admittance.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+copying /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton/__init__.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+copying /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton/setup_node.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+copying /home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/build/lib/exoskeleton/feature_extraction.py -> /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton
+byte-compiling /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/admittance.py to admittance.cpython-312.pyc
+byte-compiling /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/setup_node.py to setup_node.cpython-312.pyc
+byte-compiling /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton/feature_extraction.py to feature_extraction.cpython-312.pyc
+running install_data
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/ament_index
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/ament_index/resource_index
+creating /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/ament_index/resource_index/packages
+copying resource/exoskeleton -> /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/ament_index/resource_index/packages
+copying package.xml -> /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/share/exoskeleton
+running install_egg_info
+Copying ../../build/exoskeleton/exoskeleton.egg-info to /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/python3.12/site-packages/exoskeleton-0.0.1-py3.12.egg-info
+running install_scripts
+Installing admittance script to /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/exoskeleton
+Installing setup script to /home/jacob/Desktop/Rob-P5/ros2_ws/install/exoskeleton/lib/exoskeleton
+writing list of installed files to '/home/jacob/Desktop/Rob-P5/ros2_ws/build/exoskeleton/install.log'
