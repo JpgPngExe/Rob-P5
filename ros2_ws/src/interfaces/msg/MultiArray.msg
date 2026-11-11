@@ -1,3 +1,3 @@
-float32 rows
-float32 cols
+uint32 rows
+uint32 cols
 float32[] data
