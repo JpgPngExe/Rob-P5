@@ -106,7 +106,6 @@ class Feature_extraction(Node):
                 self.get_logger().error(f"Error: {e}")
                 raise
             features[idx] = [mav, wamp, ssc, wl]
-
         return features
     
     def emg_callback(self,msg):

@@ -32,7 +32,7 @@ class Classification(Node):
 
 
         self.data = None
-        self.class_ = 0.0
+        self.class_ = -1
 
     def restructure_data(self, msg):
         try:
