@@ -25,7 +25,8 @@ if(BUILD_TESTING)
 endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/MultiArray.msg"
+  "msg/MultiArray.msg",
+  "msg/MultiArrayTime.msg"
 )
 
 ament_package()
