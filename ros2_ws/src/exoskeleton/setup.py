@@ -25,7 +25,9 @@ setup(
     entry_points={
         'console_scripts': [
             'admittance = exoskeleton.admittance:main',
-            'setup = exoskeleton.setup_node:main'
+            'setup = exoskeleton.setup_node:main',
+            'feature_extraction = exoskeleton.feature_extraction:main',
+            'classification = exoskeleton.classification:main'
         ],
     },
 )
