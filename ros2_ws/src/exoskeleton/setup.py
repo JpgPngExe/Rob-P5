@@ -28,6 +28,8 @@ setup(
             'setup = exoskeleton.setup_node:main',
             'feature_extraction = exoskeleton.feature_extraction:main',
             'classification = exoskeleton.classification:main'
+            'EMG_read = exoskeleton.read_emg:main',
+            'signal_processing = exoskeleton.signal_processing:main'
         ],
     },
 )
