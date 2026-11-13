@@ -98,7 +98,6 @@ class read_emg(Node):
 
             # Extract the EMG data from the board data using the specified EMG channels
             emg_data = data[self.emg_channels, :]
-
             # Preserve the SDK timestamp of the last sample, not publishing time
             latest_timestamp = data[self.timestamp_channel, -1]
 
@@ -110,7 +109,7 @@ class read_emg(Node):
             msg.timestamp = float(latest_timestamp)
             self.raw_emg_publisher.publish(msg)
 
-            self.get_logger().debug(f'Published EMG data at timestamp {latest_timestamp}')
+            self.get_logger().debug(f'Published EMG data from timestamp {latest_timestamp}')
 
         except Exception as e:
             self.get_logger().error(f'Failed to read or publish EMG: {e}')

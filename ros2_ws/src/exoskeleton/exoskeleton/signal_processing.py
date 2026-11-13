@@ -113,10 +113,11 @@ class signal_processing(Node):
                 return
 
             filtered = self.process(emg_data)
-
+            n_new = filtered.shape[1]
             # Add the new samples and keep only the most recent window
-            self.buffer = np.hstack((self.buffer, filtered))[:, -self.window_samples:]
-
+            #self.buffer = np.hstack((self.buffer, filtered))[:, -self.window_samples:] #jnisbdgf
+            self.buffer = np.roll(self.buffer, -n_new, axis=1)
+            self.buffer[:, -n_new] = filtered
         except Exception as e:
             self.get_logger().error(f'Failed to process EMG: {e}')
 
