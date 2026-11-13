@@ -47,8 +47,8 @@ THE SOFTWARE.
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
 #include "I2Cdev.h"
-
 #include "MPU6050_6Axis_MotionApps20.h"
+#include "Arduino.h"
 //#include "MPU6050.h" // not necessary if using MotionApps include file
 
 // Arduino Wire library is required if I2Cdev I2CDEV_ARDUINO_WIRE implementation
@@ -144,6 +144,15 @@ VectorInt16 aa;         // [x, y, z]            accel sensor measurements
 VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measurements
 VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
 VectorFloat gravity;    // [x, y, z]            gravity vector
+VectorFloat velRel;
+VectorFloat accRel;
+VectorFloat gyro1, gyro2;
+VectorFloat aa1, aa2;
+VectorFloat aaReal1, aaReal2;
+VectorFloat gravity, gravity2;
+float vx_new;
+float vy_new;
+float vz_new;
 float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
@@ -270,9 +279,30 @@ void setup() {
 
     // configure LED for output
     pinMode(LED_PIN, OUTPUT);
+    mpu.setFullScaleGyroRange(MPU6050_GYRO_FS_250);
+    mpu2.setFullScaleGyroRange(MPU6050_GYRO_FS_250);
+    mpu.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
+    mpu2.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
+
 }
+// i = x, j = y, k = z, r = w
+void quaternion_rotate(Quaternion q, VectorFloat v) {
+    float x11 = (1 - 2 * (q.y ** 2 + q.z ** 2));
+    float x12 = 2 * (q.x * q.y + q.z * q.w);
+    float x13 = 2 * (q.x * q.z - q.y * q.w);
 
+    float x21 = 2 * (q.x * q.y - q.z * q.w);
+    float x22 = (1 - 2 * (q.x ** 2 + q.z ** 2));
+    float x23 = 2 * (q.y * q.z + q.x * q.w);
 
+    float x31 = 2 * (q.x * q.z + q.y * q.w);
+    float x32 = 2 * (q.y * q.z - q.x * q.w);
+    float x33 = (1 - 2 * (q.x ** 2 + q.y ** 2));
+
+    vx_new = x11 * v.x + x12 * v.y + x13 * v.z;
+    vy_new = x21 * v.x + x22 * v.y + x23 * v.z;
+    vz_new = x31 * v.x + x32 * v.y + x33 * v.z;
+}
 
 // ================================================================
 // ===                    MAIN PROGRAM LOOP                     ===
@@ -356,15 +386,52 @@ void loop() {
             if (angleRel > 180.0) angleRel -= 360.0;
             if (angleRel < -180.0) angleRel += 360.0;
 
-            // Print diagnostic measurements
-            Serial.print("IMU1: ");
-            Serial.print(angle1);
+            // // Print diagnostic measurements
+            // Serial.print("IMU1: ");
+            // Serial.print(angle1);
 
-            Serial.print(" | IMU2: ");
-            Serial.print(angle2);
+            // Serial.print(" | IMU2: ");
+            // Serial.print(angle2);
 
-            Serial.print(" | Relative: ");
-            Serial.println(angleRel);
+            mpu.dmpGetGyro(&gyro1, fifoBuffer);
+            mpu2.dmpGetGyro(&gyro2, fifoBuffer2);
+            quaternion_rotate(qRel,gyro2);
+            velRel.x = vx_new - gyro1.x;
+            velRel.y = vy_new - gyro1.y;
+            velRel.z = vz_new - gyro1.z;
+
+            mpu.dmpGetAccel(&aa1, fifoBuffer);
+            mpu2.dmpGetAccel(&aa2, fifoBuffer2);
+            mpu.dmpGetGravity(&gravity, &q);
+            mpu2.dmpGetGravity(&gravity2, &q2);
+            mpu.dmpGetLinearAccel(&aaReal1, &aa1, &gravity);
+            mpu2.dmpGetLinearAccel(&aaReal2, &aa2, &gravity2);
+            quaternion_rotate(qRel,aaReal2);
+            accRel.x =  vx_new - aaReal1.x;
+            accRel.y = vy_new - aaReal1.y;
+            accRel.z = vz_new - aaReal1.z;
+
+            // Serial.print(" | Relative: ");
+            // Serial.println(angleRel);
+            Serial.print(qRel.x);
+            Serial.print(",");
+            Serial.print(qRel.y);
+            Serial.print(",");
+            Serial.print(qRel.z);
+            Serial.print(",");
+            Serial.print(qRel.w);
+            Serial.print(",");
+            Serial.print((velRel.x / 131.0) * DEG_TO_RAD);
+            Serial.print(",");
+            Serial.print((velRel.y / 131.0) * DEG_TO_RAD);
+            Serial.print(",");
+            Serial.print((velRel.z / 131.0) * DEG_TO_RAD);
+            Serial.print(",");
+            Serial.print((accRel.x / 16384.0) * 9.80665);
+            Serial.print(",");
+            Serial.print((accRel.y / 16384.0) * 9.80665);
+            Serial.print(",");
+            Serial.println((accRel.z / 16384.0) * 9.80665);
 
         #endif
 
