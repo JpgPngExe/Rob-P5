@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from candle_ros2.srv import GenericPds, AddDevices, SetMode, Generic
-#from mindrove.board_shim import BoardShim, BoardIds, MindRoveInputParem
+from std_srvs.srv import Trigger
 
 emg =False
 
@@ -9,11 +9,16 @@ class SetupNode(Node):
 
     def __init__(self):
         super().__init__('Setup_Node')
+        
         self.pds_id = 100
         self.ps_module = 2
         self.mds_id = 17
         self.mds_mode = "POSITION_PID"
-        self.initialisation_complete = False
+        self.initialisation_motor_complete = False
+        self.initialisation_emg_complete = False
+        if not emg:
+            self.get_logger().info("EMG initialisation skipped")
+            self.initialisation_emg_complete = True
         self.ps_module_command =f"/pds/id_{self.pds_id}/enable_ps_{self.ps_module}"
         self.get_logger().info('Setup node started!')
         self.pds_add_client = self.create_client(AddDevices, "/pds/add_pds")
@@ -22,6 +27,9 @@ class SetupNode(Node):
         self.set_mode_client = self.create_client(SetMode, "/md/set_mode")
         self.enable_mds_client = self.create_client(Generic, "/md/enable")
         self.add_pds()
+
+        # Create a client to call the start_emg service in Read_EMG
+        self.start_emg_client = self.create_client(Trigger, "start_emg")
         if emg:
             self.connect_mindrove()
         
@@ -65,6 +73,16 @@ class SetupNode(Node):
         request.device_ids = [self.mds_id]
         future = self.enable_mds_client.call_async(request)
         future.add_done_callback(self.enable_mds_callback)
+
+    def connect_mindrove(self):
+        # Wait for the start service in Read_EMG
+        while not self.start_emg_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("Waiting for start_emg")
+
+        # Ask Read_EMG to connect and start streaming
+        request = Trigger.Request()
+        future = self.start_emg_client.call_async(request)
+        future.add_done_callback(self.connect_mindrove_callback)
 
     def add_pds_callback(self, future):
         try:
@@ -116,22 +134,26 @@ class SetupNode(Node):
             self.get_logger().info(f"Service reponse: {response}")
             if all(response.success):
                 self.get_logger().info(f"Initialisation complete")
-                self.initialisation_complete = True
+                self.initialisation_motor_complete = True
             else:
                 self.get_logger().error(f"Initialisation failed")
         except Exception as e:
             self.get_logger().error(f"Service call failed: {e}")
 
-    def connect_mindrove(self):
+    def connect_mindrove_callback(self, future):
         try:
-            parameters = MindRoveInputParem()
-            parameters.ip_adress = "192.168.4.2"
+            # Get the result from Read_EMG
+            response = future.result()
+            self.get_logger().info(response.message)
 
-            mindrove_connection = BoardShim(BoardIds.MINDROVE_WIFI_BOARD, parameters)
-            mindrove_connection.prepare_session()
-            mindrove_connection.start_stream()
+            if response.success:
+                self.get_logger().info("Initialisation complete")
+                self.initialisation_emg_complete = True
+            else:
+                self.get_logger().error("EMG initialisation failed")
+
         except Exception as e:
-            self.get_logger().error(f"No connection to EMG")
+            self.get_logger().error(f"EMG service call failed: {e}")
 
 
     
@@ -142,7 +164,7 @@ def main(args=None):
 
     node = SetupNode()
 
-    while rclpy.ok() and not node.initialisation_complete:
+    while rclpy.ok() and (not node.initialisation_motor_complete or not node.initialisation_emg_complete):
         rclpy.spin_once(node, timeout_sec=0.1)
     
     node.destroy_node()
