@@ -13,8 +13,8 @@ class signal_processing(Node):
         self.n_channels = 8                                                              # Number of EMG channels
 
         # Declare parameters for topics and segmentation
-        self.declare_parameter('input_topic', 'Raw_EMG')
-        self.declare_parameter('output_topic', 'Processed_EMG')
+        self.declare_parameter('input_topic', '/exo/raw_EMG')
+        self.declare_parameter('output_topic', '/exo/processed_EMG')
         self.declare_parameter('window_ms', 200.0)     # Length of each window in ms
         self.declare_parameter('increment_ms', 50.0)   # Time between two windows in ms (50 ms = 20 Hz)
 

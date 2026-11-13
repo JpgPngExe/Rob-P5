@@ -15,7 +15,7 @@ class read_emg(Node):
         self.timestamp_channel = BoardShim.get_timestamp_channel(BoardIds.MINDROVE_WIFI_BOARD) # Get the index of the timestamp channel
         
         # Declare parameters for sampling rate and output topic
-        self.declare_parameter('output_topic', 'Raw_EMG')
+        self.declare_parameter('output_topic', '/exo/raw_EMG')
         self.declare_parameter('read_period', 0.05)
 
         # Get the parameter values
@@ -37,7 +37,7 @@ class read_emg(Node):
         # Create a service to start the EMG data stream
         self.start_emg_service = self.create_service(
             Trigger,
-            'start_emg',
+            '/exo/start_emg',
             self.connect_mindrove
         )
 

@@ -9,8 +9,8 @@ class Feature_extraction(Node):
         self.declare_parameter("Extraction rate", 0.1)
         self.declare_parameter("Wamp_threshold", 1)
         self.declare_parameter("ssc_threshold", 1)
-        self.declare_parameter("Processed_EMG", "/Processed_EMG")
-        self.declare_parameter("Extracted_features", "/Extracted_features")
+        self.declare_parameter("Processed_EMG", "/exo/processed_EMG")
+        self.declare_parameter("Extracted_features", "/exo/extracted_features")
         
         self.timer_period = self.get_parameter("Extraction_rate").value
         self.wamp_threshold = self.get_parameter("Wamp_threshold").value

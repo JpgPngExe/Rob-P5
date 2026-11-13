@@ -29,7 +29,7 @@ class SetupNode(Node):
         self.add_pds()
 
         # Create a client to call the start_emg service in Read_EMG
-        self.start_emg_client = self.create_client(Trigger, "start_emg")
+        self.start_emg_client = self.create_client(Trigger, "/exo/start_emg")
         if emg:
             self.connect_mindrove()
         
