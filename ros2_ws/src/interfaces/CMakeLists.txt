@@ -26,7 +26,8 @@ endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/MultiArray.msg",
-  "msg/MultiArrayTime.msg"
+  "msg/MultiArrayTime.msg",
+  "msg/IMU.msg"
 )
 
 ament_package()
