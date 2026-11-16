@@ -28,7 +28,7 @@ class Classification(Node):
 
         self.subcriber_ = self.create_subscription(MultiArray, self.subscriber_topic,self.feature_callback, self.QOS)
         self.publisher_ = self.create_publisher(Int8, self.publisher_topic, self.QOS)
-        self.classification_timer = self.create_timer(self.timer,  self.classification_callback)
+        #self.classification_timer = self.create_timer(self.timer,  self.classification_callback)
 
 
         self.data = None
@@ -67,6 +67,7 @@ class Classification(Node):
         else:
             self.class_ = -1
             self.get_logger().info("Confidence too low, no class selected.")
+        self.classification_callback()
 
         
 

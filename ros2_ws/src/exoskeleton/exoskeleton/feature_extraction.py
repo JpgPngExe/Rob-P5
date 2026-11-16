@@ -19,7 +19,7 @@ class Feature_extraction(Node):
         self.data_output = self.get_parameter("Extracted_features").value
         
         self.data_subscriber = self.create_subscription(MultiArray, self.data_input, self.emg_callback, 10)
-        self.feature_timer = self.create_timer(self.timer_period, self.publish_features)
+        #self.feature_timer = self.create_timer(self.timer_period, self.publish_features)
         self.feature_publisher = self.create_publisher(MultiArray, self.data_output,10)
         self.features = None
         
@@ -113,6 +113,7 @@ class Feature_extraction(Node):
         data = self.restructure_data(msg)
         self.features = self.feature_extraction(data)
         self.get_logger().debug("Features extracted")
+        self.publish_features()
 
 def main(args=None):
     rclpy.init(args=args)
