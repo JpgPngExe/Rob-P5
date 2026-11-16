@@ -16,19 +16,19 @@ class signal_processing(Node):
         self.declare_parameter('input_topic', 'Raw_EMG')
         self.declare_parameter('output_topic', 'Processed_EMG')
         self.declare_parameter('window_ms', 200.0)     # Length of each window in ms
-        self.declare_parameter('increment_ms', 50.0)   # Time between two windows in ms (50 ms = 20 Hz)
+        #self.declare_parameter('increment_ms', 50.0)   # Time between two windows in ms (50 ms = 20 Hz)
 
         # Get the parameter values
         self.input_topic = self.get_parameter('input_topic').get_parameter_value().string_value
         self.output_topic = self.get_parameter('output_topic').get_parameter_value().string_value
         window_ms = self.get_parameter('window_ms').get_parameter_value().double_value
-        increment_ms = self.get_parameter('increment_ms').get_parameter_value().double_value
+        #increment_ms = self.get_parameter('increment_ms').get_parameter_value().double_value
 
         # Convert the window length from ms to samples
         self.window_samples = int(round(window_ms / 1000 * self.sampling_rate))
 
         # Buffer with the most recent filtered samples (8 x window_samples at most)
-        self.buffer = np.zeros((self.n_channels, 0))
+        self.buffer = np.zeros((self.n_channels, self.window_samples))
 
         # Calculate filter coefficients and filter states
         self.filtering(self.sampling_rate)
@@ -48,15 +48,15 @@ class signal_processing(Node):
             10
         )
 
-        # Create a timer that publishes the latest window at every increment
-        self.publish_timer = self.create_timer(
-            increment_ms / 1000,
-            self.publish_window
-        )
+ #       # Create a timer that publishes the latest window at every increment
+ #       self.publish_timer = self.create_timer(
+ #           increment_ms / 1000,
+ #           self.publish_window
+ #       )
 
         self.get_logger().info(
             f'Signal Processing Node has been started '
-            f'(window: {self.window_samples} samples, increment: {increment_ms} ms)'
+            f'(window: {self.window_samples} samples)'
         )
 
     def restructure_data(self, msg):
@@ -117,16 +117,19 @@ class signal_processing(Node):
             # Add the new samples and keep only the most recent window
             #self.buffer = np.hstack((self.buffer, filtered))[:, -self.window_samples:] #jnisbdgf
             self.buffer = np.roll(self.buffer, -n_new, axis=1)
-            self.buffer[:, -n_new] = filtered
+            self.buffer[:, -n_new:] = filtered
+
+            self.publish_window()
+
         except Exception as e:
             self.get_logger().error(f'Failed to process EMG: {e}')
 
     def publish_window(self):
         """Publish the most recent window of filtered EMG"""
 
-        # Wait until the buffer contains a full window
-        if self.buffer.shape[1] < self.window_samples:
-            return
+ #       # Wait until the buffer contains a full window
+ #       if self.buffer.shape[1] < self.window_samples:
+ #           return
 
         try:
             rows, cols, values = self.prepare_data(self.buffer)
