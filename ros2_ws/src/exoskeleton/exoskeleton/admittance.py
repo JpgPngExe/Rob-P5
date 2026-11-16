@@ -102,7 +102,7 @@ class AdmittanceNode(Node):
         self.tau = msg.data
 
     def classification_callback(self, msg):
-        counter = msg.header
+        counter = msg.header    
         self.classification_buffer[counter] = msg        
         self.check_sync(counter)
 
@@ -144,7 +144,7 @@ class AdmittanceNode(Node):
 
             q = imu_msg.orientation
             r = Rotation.from_quat([q.x,q.y,q.z,q.w])
-            roll, pitch, yaw = r.as_euler('xyz', degrees=False)
+            roll = r.as_euler('xyz', degrees=False)[0]
             self.theta_measured = roll
 
             emg_data = self.restructure_data(emg_msg)
