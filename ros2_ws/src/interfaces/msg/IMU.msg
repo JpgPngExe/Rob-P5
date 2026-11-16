@@ -1,2 +1,2 @@
-string text
-uint32 header
+sensor_msgs/Imu Imu
+uint32 counter
