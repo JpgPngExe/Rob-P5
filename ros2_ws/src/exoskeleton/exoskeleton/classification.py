@@ -1,5 +1,5 @@
 import rclpy
-from interfaces import MultiArray
+from interfaces import MultiArray, Uint8_with_header
 import numpy as np
 from rclpy.node import Node
 from joblib import load
@@ -27,12 +27,13 @@ class Classification(Node):
 
 
         self.subcriber_ = self.create_subscription(MultiArray, self.subscriber_topic,self.feature_callback, self.QOS)
-        self.publisher_ = self.create_publisher(Int8, self.publisher_topic, self.QOS)
+        self.publisher_ = self.create_publisher(Uint8_with_header, self.publisher_topic, self.QOS)
         #self.classification_timer = self.create_timer(self.timer,  self.classification_callback)
 
 
         self.data = None
         self.class_ = -1
+        self.counter = 0
 
     def restructure_data(self, msg):
         try:
@@ -44,14 +45,15 @@ class Classification(Node):
             raise
         return data
     
-
     def classification_callback(self):
-        msg = Int8()
+        msg = Uint8_with_header()
         msg.data = int(self.class_)
+        msg.header = self.counter
         self.publisher_.publish(msg)
 
     def feature_callback(self, msg):
         self.data = self.restructure_data(msg)
+        self.counter = msg.header
         try:
             start = perf_counter()
             proba = self.model.predict_proba(self.data)[0]

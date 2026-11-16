@@ -11,11 +11,9 @@ class Time_synchronizer(Node):
         self.declare_parameter("Max_delay", 0.005)
         self.declare_parameter("EMG_publisher", "/exo/synced_EMG")
         self.declare_parameter("IMU_publisher", "/exo/synced_IMU")
-        self.declare_parameter("EMG_subscriber", "raw_EMG")
+        self.declare_parameter("EMG_subscriber", "/exo/raw_EMG")
         self.declare_parameter("IMU_subscriber", "arduino_output")
         
-
-
         self.QOS = self.get_parameter("QOS").value
         self.queue_size = self.get_parameter("Queue_size").value
         self.max_delay = self.get_parameter("Max_delay").value
@@ -24,8 +22,6 @@ class Time_synchronizer(Node):
         self.EMG_subsriber_path = self.get_parameter("EMG_subscriber").value
         self.IMU_subsriber_path = self.get_parameter("IMU_subscriber").value
     
-
-
         self.EMG_pub = self.create_publisher(MultiArray, self.EMG_publisher_path, self.QOS)
         self.IMU_pub = self.create_publisher(IMU, self.IMU_publisher_path, self.QOS)
         self.EMG_sub = Subscriber(self, MultiArrayTime, self.EMG_subsriber_path)
@@ -33,7 +29,6 @@ class Time_synchronizer(Node):
 
         self.time_sync = ApproximateTimeSynchronizer([self.EMG_sub, self.IMU_sub], self.queue_size, self.max_delay)
         self.time_sync.registerCallback(self.SyncCallback)
-
         self.counter = 0
 
     def SyncCallback(self, emg, imu):
@@ -44,8 +39,17 @@ class Time_synchronizer(Node):
         emg_msg.header = self.counter
 
         imu_msg = IMU()
-        imu_msg.text = imu.text
-        imu_msg.header = self.counter
+        imu_msg.orientation.x = imu.orientation.x
+        imu_msg.orientation.y = imu.orientation.y
+        imu_msg.orientation.z = imu.orientation.z
+        imu_msg.orientation.w = imu.orientation.w
+        imu_msg.angular_velocity.x = imu.angular_velocity.x
+        imu_msg.angular_velocity.y = imu.angular_velocity.y
+        imu_msg.angular_velocity.z = imu.angular_velocity.z
+        imu_msg.linear_acceleration.x = imu.linear_acceleration.x
+        imu_msg.linear_acceleration.y = imu.linear_acceleration.y
+        imu_msg.linear_acceleration.z = imu.linear_acceleration.z
+        imu_msg.counter = self.counter
 
         self.EMG_pub.publish(emg_msg)
         self.IMU_pub.publish(imu_msg)

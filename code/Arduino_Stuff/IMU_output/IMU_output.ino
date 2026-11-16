@@ -68,12 +68,6 @@ volatile int64_t lastSecondMicros = 0;
 volatile bool secondTicked = false;
 
 
-// Hardware interrupt triggered every exact 1.000 second by the RTC
-void IRAM_ATTR onRtcPulse() {
-  lastSecondMicros = esp_timer_get_time();
-  secondTicked = true;
-}
-
 // class default I2C address is 0x68
 // specific I2C addresses may be passed as a parameter here
 // AD0 low = 0x68 (default for SparkFun breakout and InvenSense evaluation board)
@@ -193,7 +187,14 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\
 // ===                      INITIAL SETUP                       ===
 // ================================================================
 
+// Hardware interrupt triggered every exact 1.000 second by the RTC
+void IRAM_ATTR onRtcPulse() {
+  lastSecondMicros = esp_timer_get_time();
+  secondTicked = true;
+}
+
 void setup() {
+    
     // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     
@@ -204,7 +205,7 @@ void setup() {
         Fastwire::setup(400, true);
     #endif
     
-    rtc.begin();
+    
     enableRtc1HzOutput();
 
     pinMode(CLKOUT_PIN, INPUT_PULLUP);
@@ -307,7 +308,10 @@ void setup() {
     mpu.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
     mpu2.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
 
+    rtc.begin();
+
 }
+ 
 
 void enableRtc1HzOutput() {
   Wire.beginTransmission(PCF85063_ADDR);
@@ -338,6 +342,10 @@ void quaternion_rotate(Quaternion q, VectorInt16 v) {
 // ================================================================
 // ===                    MAIN PROGRAM LOOP                     ===
 // ================================================================
+
+
+
+
 
 void loop() {
     int64_t currentMicros = esp_timer_get_time();

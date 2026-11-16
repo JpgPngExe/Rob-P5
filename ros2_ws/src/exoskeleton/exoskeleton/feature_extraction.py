@@ -24,6 +24,7 @@ class Feature_extraction(Node):
         self.features = None
         
         self.get_logger().info("Feature Extraction Node Initiated succesfully")
+        self.caounter = 0
 
     def restructure_data(self, msg):
         try:
@@ -60,6 +61,7 @@ class Feature_extraction(Node):
         msg.rows = rows
         msg.cols = cols
         msg.data = data
+        msg.data = self.counter
         try:
             self.feature_publisher.publish(msg)
         except Exception as e:
@@ -111,6 +113,7 @@ class Feature_extraction(Node):
     def emg_callback(self,msg):
         self.get_logger().debug("Message recieved")
         data = self.restructure_data(msg)
+        self.counter = msg.header
         self.features = self.feature_extraction(data)
         self.get_logger().debug("Features extracted")
         self.publish_features()
