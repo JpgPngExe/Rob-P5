@@ -57,6 +57,23 @@ THE SOFTWARE.
     #include "Wire.h"
 #endif
 
+#include <Wire.h>
+#include "PCF85063TP.h"
+
+#define CLKOUT_PIN 4       // Connect Grove CLKOUT pad to GPIO4
+#define PCF85063_ADDR 0x51 // Default I2C address for PCF85063TP
+
+PCD85063TP rtc;
+volatile int64_t lastSecondMicros = 0;
+volatile bool secondTicked = false;
+
+
+// Hardware interrupt triggered every exact 1.000 second by the RTC
+void IRAM_ATTR onRtcPulse() {
+  lastSecondMicros = esp_timer_get_time();
+  secondTicked = true;
+}
+
 // class default I2C address is 0x68
 // specific I2C addresses may be passed as a parameter here
 // AD0 low = 0x68 (default for SparkFun breakout and InvenSense evaluation board)
@@ -146,10 +163,10 @@ VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measure
 VectorFloat gravity;    // [x, y, z]            gravity vector
 VectorFloat velRel;
 VectorFloat accRel;
-VectorFloat gyro1, gyro2;
-VectorFloat aa1, aa2;
-VectorFloat aaReal1, aaReal2;
-VectorFloat gravity, gravity2;
+VectorInt16 gyro1, gyro2;
+VectorInt16 aa1, aa2;
+VectorInt16 aaReal1, aaReal2;
+VectorFloat gravity2;
 float vx_new;
 float vy_new;
 float vz_new;
@@ -186,7 +203,12 @@ void setup() {
     #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
         Fastwire::setup(400, true);
     #endif
+    
+    rtc.begin();
+    enableRtc1HzOutput();
 
+    pinMode(CLKOUT_PIN, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(CLKOUT_PIN), onRtcPulse, RISING);
     // initialize serial communication
     // (115200 chosen because it is required for Teapot Demo output, but it's
     // really up to you depending on your project)
@@ -285,19 +307,27 @@ void setup() {
     mpu2.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
 
 }
+
+void enableRtc1HzOutput() {
+  Wire.beginTransmission(PCF85063_ADDR);
+  Wire.write(0x01); // Control_2 register
+  Wire.write(0x06); // COF[2:0] = 110 -> 1Hz square wave on CLKOUT
+  Wire.endTransmission();
+}
+
 // i = x, j = y, k = z, r = w
-void quaternion_rotate(Quaternion q, VectorFloat v) {
-    float x11 = (1 - 2 * (q.y ** 2 + q.z ** 2));
+void quaternion_rotate(Quaternion q, VectorInt16 v) {
+    float x11 = (1 - 2 * (q.y * q.y + q.z * q.z));
     float x12 = 2 * (q.x * q.y + q.z * q.w);
     float x13 = 2 * (q.x * q.z - q.y * q.w);
 
     float x21 = 2 * (q.x * q.y - q.z * q.w);
-    float x22 = (1 - 2 * (q.x ** 2 + q.z ** 2));
+    float x22 = (1 - 2 * (q.x * q.x + q.z * q.z));
     float x23 = 2 * (q.y * q.z + q.x * q.w);
 
     float x31 = 2 * (q.x * q.z + q.y * q.w);
     float x32 = 2 * (q.y * q.z - q.x * q.w);
-    float x33 = (1 - 2 * (q.x ** 2 + q.y ** 2));
+    float x33 = (1 - 2 * (q.x * q.x + q.y * q.y));
 
     vx_new = x11 * v.x + x12 * v.y + x13 * v.z;
     vy_new = x21 * v.x + x22 * v.y + x23 * v.z;
@@ -309,6 +339,19 @@ void quaternion_rotate(Quaternion q, VectorFloat v) {
 // ================================================================
 
 void loop() {
+    int64_t currentMicros = esp_timer_get_time();
+    uint16_t ms = (currentMicros - lastSecondMicros) / 1000;
+  
+    if (ms >= 1000) ms = 999; // Clamp if polled right before ISR fires
+
+    // Read whole seconds from RTC (or update local counter on secondTicked)
+    rtc.getTime();
+  
+    char timestamp[32];
+    snprintf(timestamp, sizeof(timestamp), "%02d:%02d:%02d.%03d", 
+           rtc.hour, rtc.minute, rtc.second, ms);
+           
+    
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO
@@ -337,7 +380,6 @@ void loop() {
       //      Serial.print("\t");
       //      Serial.println(q2.z);
       //  #endif
-        
         
         
         #ifdef OUTPUT_READABLE_QUATERNION //Beregner quaternioner til relativ vinkel (aksen kan ændres ved at ændre z til x eller y)
@@ -392,7 +434,7 @@ void loop() {
 
             // Serial.print(" | IMU2: ");
             // Serial.print(angle2);
-            Quaternion qRelInv = (qRel.w, -qRel.x, -qRel.y, -qRel.z)
+            Quaternion qRelInv(qRel.w, -qRel.x, -qRel.y, -qRel.z);
             mpu.dmpGetGyro(&gyro1, fifoBuffer);
             mpu2.dmpGetGyro(&gyro2, fifoBuffer2);
             quaternion_rotate(qRelInv,gyro2);
@@ -431,7 +473,7 @@ void loop() {
             Serial.print(",");
             Serial.print((accRel.y / 16384.0) * 9.80665);
             Serial.print(",");
-            Serial.println((accRel.z / 16384.0) * 9.80665);
+            Serial.print((accRel.z / 16384.0) * 9.80665);
 
         #endif
 

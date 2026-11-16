@@ -2,6 +2,8 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 import serial
+from message_filters import Subscriber, ApproximateTimeSynchronizer
+from rclpy.clock import Clock
 
 
 class SerialPublisher(Node):
@@ -20,12 +22,19 @@ class SerialPublisher(Node):
     def timer_callback(self):
         line = self.arduinoData.readline()
         text = line.decode('utf-8', errors='replace').strip()
+        imu = String()
+
+        #sync stuff
+        self.now = Clock().now().to_msg()
+        imu.header.stamp = self.now
+
 
         #self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, text="{text}"')
 
-        msg = String()
-        msg.data = text
-        self.publisher.publish(msg)
+       
+        imu.data = text
+        self.publisher.publish(imu)
+
 def main(args=None):
     rclpy.init(args=args)
     serial_node = SerialPublisher()
