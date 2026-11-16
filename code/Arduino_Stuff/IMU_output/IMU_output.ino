@@ -240,8 +240,9 @@ void setup() {
 
     // load and configure the DMP
     Serial.println(F("Initializing DMP..."));
-    devStatus2 = mpu2.dmpInitialize();
     devStatus = mpu.dmpInitialize();
+    devStatus2 = mpu2.dmpInitialize();
+    
 
     // supply your own gyro offsets here, scaled for min sensitivity
     mpu.setXGyroOffset(73);
@@ -474,7 +475,9 @@ void loop() {
             Serial.print((accRel.y / 16384.0) * 9.80665);
             Serial.print(",");
             Serial.print((accRel.z / 16384.0) * 9.80665);
-
+            Serial.print(",");
+            Serial.println(timestamp);
+            
         #endif
 
 
