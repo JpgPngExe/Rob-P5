@@ -30,6 +30,7 @@ setup(
             'classification = exoskeleton.classification:main'
             'EMG_read = exoskeleton.read_emg:main',
             'signal_processing = exoskeleton.signal_processing:main'
+            'time_synchronizer = exoskeleton.time_synchronizer:main'
         ],
     },
 )
