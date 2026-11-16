@@ -392,10 +392,10 @@ void loop() {
 
             // Serial.print(" | IMU2: ");
             // Serial.print(angle2);
-
+            Quaternion qRelInv = (qRel.w, -qRel.x, -qRel.y, -qRel.z)
             mpu.dmpGetGyro(&gyro1, fifoBuffer);
             mpu2.dmpGetGyro(&gyro2, fifoBuffer2);
-            quaternion_rotate(qRel,gyro2);
+            quaternion_rotate(qRelInv,gyro2);
             velRel.x = vx_new - gyro1.x;
             velRel.y = vy_new - gyro1.y;
             velRel.z = vz_new - gyro1.z;
@@ -406,7 +406,7 @@ void loop() {
             mpu2.dmpGetGravity(&gravity2, &q2);
             mpu.dmpGetLinearAccel(&aaReal1, &aa1, &gravity);
             mpu2.dmpGetLinearAccel(&aaReal2, &aa2, &gravity2);
-            quaternion_rotate(qRel,aaReal2);
+            quaternion_rotate(qRelInv,aaReal2);
             accRel.x =  vx_new - aaReal1.x;
             accRel.y = vy_new - aaReal1.y;
             accRel.z = vz_new - aaReal1.z;
