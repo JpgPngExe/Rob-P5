@@ -79,11 +79,10 @@ RUN pip install --no-cache-dir \
         lark \
 	pyserial \
 	empy==3.3.4 \
-	catkin_pkg \
-	mindrove \
-    joblib
+	catkin_pkg 
 
 
+RUN /usr/bin/python3 -m pip install --no-cache-dir --break-system-packages mindrove joblib
 # Build system
 # -------------------------
 RUN pip install meson

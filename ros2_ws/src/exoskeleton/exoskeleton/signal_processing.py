@@ -128,9 +128,9 @@ class signal_processing(Node):
     def publish_window(self, header):
         """Publish the most recent window of filtered EMG"""
 
-        # Wait until the buffer contains a full window
-        #if self.buffer.shape[1] < self.window_samples:
-        #    return
+ #       # Wait until the buffer contains a full window
+ #       if self.buffer.shape[1] < self.window_samples:
+ #           return
 
         try:
             rows, cols, values = self.prepare_data(self.buffer)
