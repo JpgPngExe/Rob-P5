@@ -1,3 +1,7 @@
+#include <ESP32Time.h>
+#include "time.h"
+#include <WiFi.h>
+
 // I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class using DMP (MotionApps v2.0)
 // 6/21/2012 by Jeff Rowberg <jeff@rowberg.net>
 // Updates should (hopefully) always be available at https://github.com/jrowberg/i2cdevlib
@@ -49,6 +53,7 @@ THE SOFTWARE.
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "Arduino.h"
+#include "time.h"
 //#include "MPU6050.h" // not necessary if using MotionApps include file
 
 // Arduino Wire library is required if I2Cdev I2CDEV_ARDUINO_WIRE implementation
@@ -58,14 +63,10 @@ THE SOFTWARE.
 #endif
 
 #include <Wire.h>
-#include "PCF85063TP.h"
 
-#define CLKOUT_PIN 4       // Connect Grove CLKOUT pad to GPIO4
-#define PCF85063_ADDR 0x51 // Default I2C address for PCF85063TP
+ESP32Time rtc;
 
-PCD85063TP rtc;
-volatile int64_t lastSecondMicros = 0;
-volatile bool secondTicked = false;
+
 
 
 // class default I2C address is 0x68
@@ -92,7 +93,6 @@ MPU6050 mpu2(0x69); // <-- use for AD0 high
    http://arduino.cc/forum/index.php/topic,109987.0.html
    http://code.google.com/p/arduino/issues/detail?id=958
  * ========================================================================= */
-
 
 
 // uncomment "OUTPUT_READABLE_QUATERNION" if you want to see the actual
@@ -130,6 +130,15 @@ MPU6050 mpu2(0x69); // <-- use for AD0 high
 // format used for the InvenSense teapot demo
 //#define OUTPUT_TEAPOT
 
+
+// Wi-Fi credentials
+const char *ssid = "TP-Link_2792";
+const char *password = "46402516";
+
+// NTP settings
+const char *ntpServer = "pool.ntp.org";
+const long gmtOffset_sec = 3600;      // GMT+1, same offset as the original page
+const int daylightOffset_sec = 0;     // adjust if DST is needed
 
 
 //#define INTERRUPT_PIN 2  // use pin 2 on Arduino Uno & most boards
@@ -187,12 +196,6 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\
 // ===                      INITIAL SETUP                       ===
 // ================================================================
 
-// Hardware interrupt triggered every exact 1.000 second by the RTC
-void IRAM_ATTR onRtcPulse() {
-  lastSecondMicros = esp_timer_get_time();
-  secondTicked = true;
-}
-
 void setup() {
     
     // join I2C bus (I2Cdev library doesn't do this automatically)
@@ -206,10 +209,6 @@ void setup() {
     #endif
     
     
-    enableRtc1HzOutput();
-
-    pinMode(CLKOUT_PIN, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(CLKOUT_PIN), onRtcPulse, RISING);
     // initialize serial communication
     // (115200 chosen because it is required for Teapot Demo output, but it's
     // really up to you depending on your project)
@@ -295,7 +294,7 @@ void setup() {
         // 2 = DMP configuration updates failed
         // (if it's going to break, usually the code will be 1)
         Serial.print(F("DMP Initialization failed (code "));
-        Serial.print(devStatus);
+        Serial.println(devStatus);
         Serial.print(F("DMP Initialization failed (code "));
         Serial.print(devStatus2);
         Serial.println(F(")"));
@@ -308,17 +307,36 @@ void setup() {
     mpu.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
     mpu2.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
 
-    rtc.begin();
+    // Connect to Wi-Fi
+    Serial.printf("Connecting to %s", ssid);
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(50);
+        Serial.print(".");
+    }
+    Serial.println(" connected!");
 
+    // Get the time digitally from the NTP server
+    configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+
+    struct tm timeinfo;
+    if (!getLocalTime(&timeinfo, 15000)) {  // wait up to 15 s
+        Serial.println("Failed to obtain time from NTP!");
+        return;
+    }
+
+    // Sync the ESP32 internal RTC with the epoch time received.
+    // ESP32Time anchors its millisecond/microsecond counters to this moment.
+    time_t now = time(nullptr);
+    rtc.setTime(now);
+    Serial.println("Time synced over NTP.");
+
+    // Wi-Fi is no longer needed
+    WiFi.disconnect(true);
+    WiFi.mode(WIFI_OFF);
 }
  
 
-void enableRtc1HzOutput() {
-  Wire.beginTransmission(PCF85063_ADDR);
-  Wire.write(0x01); // Control_2 register
-  Wire.write(0x06); // COF[2:0] = 110 -> 1Hz square wave on CLKOUT
-  Wire.endTransmission();
-}
 
 // i = x, j = y, k = z, r = w
 void quaternion_rotate(Quaternion q, VectorInt16 v) {
@@ -348,19 +366,6 @@ void quaternion_rotate(Quaternion q, VectorInt16 v) {
 
 
 void loop() {
-    int64_t currentMicros = esp_timer_get_time();
-    uint16_t ms = (currentMicros - lastSecondMicros) / 1000;
-  
-    if (ms >= 1000) ms = 999; // Clamp if polled right before ISR fires
-
-    // Read whole seconds from RTC (or update local counter on secondTicked)
-    rtc.getTime();
-  
-    char timestamp[32];
-    snprintf(timestamp, sizeof(timestamp), "%02d:%02d:%02d.%03d", 
-           rtc.hour, rtc.minute, rtc.second, ms);
-           
-    
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO
@@ -484,7 +489,8 @@ void loop() {
             Serial.print(",");
             Serial.print((accRel.z / 16384.0) * 9.80665);
             Serial.print(",");
-            Serial.println(timestamp);
+            Serial.printf("%lu.%03lu\n",
+                  rtc.getLocalEpoch(), rtc.getMicros());
             
         #endif
 
