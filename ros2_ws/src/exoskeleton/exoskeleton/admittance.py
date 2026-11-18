@@ -3,15 +3,15 @@ import numpy as np
 from rclpy.node import Node
 from candle_ros2.msg import MotionCmd
 from std_msgs.msg import Float32
-from interfaces import Uin8_with_header, IMU, MultiArray
+from interfaces.msg import Int8WithHeader, IMU, MultiArray
 from scipy.spatial.transform import Rotation
 
 class AdmittanceNode(Node):
     def __init__(self):
         super().__init__('Admittance_Node')
         self.declare_parameter("Virtual_mass", 1.0)
-        self.declare_parameter("Base_K", 0.1)
-        self.declare_parameter("Max_K", 5.0)
+        self.declare_parameter("Base_K", 1.0)
+        self.declare_parameter("Max_K", 10.0)
         self.declare_parameter("Controller_update_rate", 1/10)
         self.declare_parameter("Range_of_motion", [-100,100])
         self.declare_parameter("Quality_of_service", 10)
@@ -37,8 +37,6 @@ class AdmittanceNode(Node):
         self.imu_topic = self.get_parameter("IMU").value
         self.emg_topic = self.get_parameter("EMG").value
         
-
-
         self.tau = 0.0
         self.B = 1.0
         self.theta = 0.0
@@ -53,11 +51,9 @@ class AdmittanceNode(Node):
         self.emg_buffer = {}
         self.theta_measured = 0.0
 
-
-
         self.publish_motor_command = self.create_publisher(MotionCmd, self.motion_command, self.qos)
         self.torque_subsriber = self.create_subscription(Float32, self.torque_estimator, self.torque_estimator_callback, self.qos)
-        self.classification_subscriber = self.create_subscription(Uin8_with_header, self.classification_topic, self.classification_callback, self.qos)
+        self.classification_subscriber = self.create_subscription(Int8WithHeader, self.classification_topic, self.classification_callback, self.qos)
         self.imu_subscriber = self.create_subscription(IMU, self.imu_topic, self.imu_callback, self.qos)
         self.processed_emg_subscriber = self.create_subscription(MultiArray, self.emg_topic, self.emg_callback, self.qos)
         self.motor_timer = self.create_timer(self.Ts, self.motor_timer_callback)  
@@ -69,13 +65,16 @@ class AdmittanceNode(Node):
             x = 1.0 - max(dist_lower, 0.0) / self.buffer
             factor = self.factor_coefficient * (1.0 - np.cos(x * np.pi))
             self.K = self.base_K + (self.max_K - self.base_K) * factor
+            self.B = 2 * np.sqrt(self.M * self.K)
         elif dist_upper < self.buffer:
             x = 1.0 - max(dist_upper, 0.0) / self.buffer
             factor = self.factor_coefficient * (1.0 - np.cos(x * np.pi))
             self.K = self.base_K + (self.max_K - self.base_K) * factor
+            self.B = 2 * np.sqrt(self.M * self.K)
         else:
-            self.K = self.base_K
-        self.B = 2 * np.sqrt(self.M * self.K)
+            self.K = 0.0
+            self.B = 10 * self.M
+        
 
     def admittance(self):
         self.theta_last = self.theta_prev
@@ -83,6 +82,7 @@ class AdmittanceNode(Node):
         self.vel_prev = self.vel
         #self.theta = (self.tau * self.Ts**2 + self.theta_prev * (2*self.M + self.B * self.Ts) - self.M * self.theta_last) / (self.M + self.B * self.Ts + self.K * self.Ts**2)
         self.vel = (self.tau * self.Ts + self.M * self.vel_prev - self.K*self.Ts * self.theta_measured) / (self.M + self.B * self.Ts)
+        self.vel = np.clip(self.vel, -8.0, 8.0) #Min and max velocity of the motor
         self.theta = self.theta_prev + self.vel * self.Ts
         self.theta = np.clip(self.theta, self.rom[0], self.rom[1])
         
@@ -91,9 +91,9 @@ class AdmittanceNode(Node):
         self.admittance()
         msg = MotionCmd()
         msg.device_ids = [17]
-        msg.target_position = [self.theta]
-        msg.target_velocity = [3]
-        msg.target_torque = [1.3]
+        msg.target_position = [0.0]
+        msg.target_velocity = [self.vel]
+        msg.target_torque = [0.0]
         self.publish_motor_command.publish(msg)
         self.get_logger().info(f"Publishing: {msg}")
 
@@ -150,9 +150,8 @@ class AdmittanceNode(Node):
             emg_data = self.restructure_data(emg_msg)
             intensity = np.sqrt(np.mean(emg_data ** 2))
             self.tau = intensity * self.classification
-            self.get_logger().debug(f"Synced Counter: {counter}, Classification: {self.classification}, Roll: {np.rad2deg(self.theta_measured)}, Intensity (RMS): {intensity}")
+            self.get_logger().debug(f"Synced Counter: {counter}, Classification: {self.classification}, Roll: {np.rad2deg(self.theta_measured)} deg, Intensity (RMS): {intensity}")
         
-
 def main(args=None):
     rclpy.init(args=args)
 
@@ -161,8 +160,6 @@ def main(args=None):
     
     node.destroy_node()
     rclpy.shutdown()
-
-
 
 if __name__ == '__main__':
     main()

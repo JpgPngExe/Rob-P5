@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from message_filters import Subscriber, ApproximateTimeSynchronizer
-from interfaces import MultiArrayTime, MultiArray, IMU
+from interfaces.msg import MultiArrayTime, MultiArray, IMU
 
 class Time_synchronizer(Node):
     def __init__(self):
@@ -55,7 +55,23 @@ class Time_synchronizer(Node):
         self.IMU_pub.publish(imu_msg)
         self.counter += 1
 
-    
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = Time_synchronizer()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
 
 
 

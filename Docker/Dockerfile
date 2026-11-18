@@ -80,7 +80,8 @@ RUN pip install --no-cache-dir \
 	pyserial \
 	empy==3.3.4 \
 	catkin_pkg \
-	mindrove
+	mindrove \
+    joblib
 
 
 # Build system

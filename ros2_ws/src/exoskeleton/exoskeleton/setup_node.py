@@ -1,8 +1,9 @@
 import rclpy
 from rclpy.node import Node
 from candle_ros2.srv import GenericPds, AddDevices, SetMode, Generic
+from candle_ros2.msg import VelocityPidCmd, Pid, MotionCmd
 from std_srvs.srv import Trigger
-
+import time
 """
 Hvis EMGen skal initialiseres, skal man køre kommandoen:
 ros2 run exoskeleton setup_node --ros-args -p Setup_Node:emg
@@ -20,7 +21,7 @@ class SetupNode(Node):
         self.pds_id = 100
         self.ps_module = 2
         self.mds_id = 17
-        self.mds_mode = "POSITION_PID"
+        self.mds_mode = "VELOCITY_PID"
         self.initialisation_motor_complete = False
         self.initialisation_emg_complete = False
         if not emg:
@@ -33,6 +34,8 @@ class SetupNode(Node):
         self.add_mds_client = self.create_client(AddDevices, "/md/add_mds")
         self.set_mode_client = self.create_client(SetMode, "/md/set_mode")
         self.enable_mds_client = self.create_client(Generic, "/md/enable")
+        self.velocity_pid_pub = self.create_publisher(VelocityPidCmd,'/md/velocity_command',10)
+        self.motion_publisher = self.create_publisher(MotionCmd,'/md/motion_command',10)
         self.add_pds()
 
         # Create a client to call the start_emg service in Read_EMG
@@ -80,6 +83,32 @@ class SetupNode(Node):
         request.device_ids = [self.mds_id]
         future = self.enable_mds_client.call_async(request)
         future.add_done_callback(self.enable_mds_callback)
+
+    def set_velocity_pid(self):
+        msg = VelocityPidCmd()
+        msg.device_ids = [self.mds_id]
+
+        pid = Pid()
+        pid.kp = 1.5
+        pid.ki = 0.001
+        pid.kd = 0.002
+        pid.i_windup = 0.250
+        pid.max_output = 100.0
+
+        msg.velocity_pid = [pid]
+
+        self.velocity_pid_pub.publish(msg)
+
+    def publish_velocity(self):
+        msg = MotionCmd()
+
+        msg.device_ids = [17]
+        msg.target_position = [0.0]
+        msg.target_velocity = [0.0]
+        msg.target_torque = [0.0]
+
+        self.motion_publisher.publish(msg)
+
 
     def connect_mindrove(self):
         # Wait for the start service in Read_EMG
@@ -142,6 +171,12 @@ class SetupNode(Node):
             if all(response.success):
                 self.get_logger().info(f"Initialisation complete")
                 self.initialisation_motor_complete = True
+                while self.velocity_pid_pub.get_subscription_count() == 0:
+                    self.get_logger().info("Waiting for velocity PID subscriber...")
+                self.set_velocity_pid()
+                #time.sleep(0.5)
+                self.publish_velocity()
+                self.get_logger().info("Velocity PID parameters published")
             else:
                 self.get_logger().error(f"Initialisation failed")
         except Exception as e:

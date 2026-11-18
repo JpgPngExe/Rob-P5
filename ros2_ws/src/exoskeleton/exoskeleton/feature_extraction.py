@@ -6,7 +6,7 @@ from interfaces.msg import MultiArray
 class Feature_extraction(Node):
     def __init__(self):
         super().__init__('Feature_extraction_Node')
-        self.declare_parameter("Extraction rate", 0.1)
+        self.declare_parameter("Extraction_rate", 0.1)
         self.declare_parameter("Wamp_threshold", 1)
         self.declare_parameter("ssc_threshold", 1)
         self.declare_parameter("Processed_EMG", "/exo/processed_EMG")

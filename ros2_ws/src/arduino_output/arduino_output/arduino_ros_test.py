@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from interfaces import IMU
+from interfaces.msg import IMU
 import serial
 from message_filters import Subscriber, ApproximateTimeSynchronizer
 from rclpy.clock import Clock
@@ -31,12 +31,8 @@ class SerialPublisher(Node):
 
 
         #self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, text="{text}"')
-<<<<<<< HEAD
-
-       
         imu.data = text
         self.publisher.publish(imu)
-=======
         values = [float(x) for x in text.split(',')]
         msg = IMU()
         msg.orientation.x = values[0]
@@ -51,7 +47,6 @@ class SerialPublisher(Node):
         msg.linear_acceleration.z = values[9]
         msg.header.stamp = values[10]
         self.publisher.publish(msg)
->>>>>>> 65ccc33731fcfee06d3182d0b2c1c385b8b0ddf5
 
 def main(args=None):
     rclpy.init(args=args)

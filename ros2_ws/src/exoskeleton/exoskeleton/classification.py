@@ -1,5 +1,5 @@
 import rclpy
-from interfaces import MultiArray, Uint8_with_header
+from interfaces.msg import MultiArray, Int8WithHeader
 import numpy as np
 from rclpy.node import Node
 from joblib import load
@@ -27,7 +27,7 @@ class Classification(Node):
 
 
         self.subcriber_ = self.create_subscription(MultiArray, self.subscriber_topic,self.feature_callback, self.QOS)
-        self.publisher_ = self.create_publisher(Uint8_with_header, self.publisher_topic, self.QOS)
+        self.publisher_ = self.create_publisher(Int8WithHeader, self.publisher_topic, self.QOS)
         #self.classification_timer = self.create_timer(self.timer,  self.classification_callback)
 
 
@@ -46,7 +46,7 @@ class Classification(Node):
         return data
     
     def classification_callback(self):
-        msg = Uint8_with_header()
+        msg = Int8WithHeader()
         msg.data = int(self.class_)
         msg.header = self.counter
         self.publisher_.publish(msg)
