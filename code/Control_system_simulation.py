@@ -10,28 +10,30 @@ class controller:
         self.Ts = 1 / self.fs
         self.kp = 15.0
         self.ki = 0.0
-        self.kd = 0.001
+        self.kd = 10
         self.measured = 0.0
         self.reference = 0.0
         self.deadband = 0.001
         self.N = 50.0
         self.D_prev = 0.0
 
-        self.M_start = 1.0
+        self.M_start = 0.5
         self.M = self.M_start
         self.D = 1.0
-        self.K = 1.0
+        self.K = 0.0
+        self.base_K = 1.0
         self.theta = 0.0
         self.theta_prev = 0.0
         self.theta_last = 0.0
-
+        self.vel = 0.0 
+        self.vel_prev = 0.0 
         self.adm_decimation = 10
         self.settling_time = 0.1
         self.adm_rom = [np.deg2rad(-71), np.deg2rad(51.4)]
         #self.adm_rom = [np.deg2rad(-1000), np.deg2rad(1000)]
-        self.base_K = 1.0
-        self.max_k = 15.0
-        self.buffer = np.deg2rad(10)
+        
+        self.max_k = 10.0
+        self.buffer = np.deg2rad(5)
         self.Ts_adm = self.Ts * self.adm_decimation
         self.J_est = 0.0
         self.J_gain = 0.0
@@ -79,20 +81,23 @@ class controller:
             factor = 0.5 * (1.0 - np.cos(x * np.pi))
             self.K = self.base_K + (self.max_k - self.base_K) * factor
         else:
-            self.K = self.base_K
+            self.K = 0.0
         if self.K > 0:
             self.D = 2*np.sqrt(self.M * self.K)
         else:
-            self.D = self.M / self.settling_time
+            self.D = self.M * 10 #0.1 time constant
     
-    def admittance_control(self,tau):
+    def admittance_control(self,tau): 
         self.theta_last = self.theta_prev
         self.theta_prev = self.theta
-        self.theta = (tau * self.Ts_adm**2 + self.theta_prev * (2 * self.M + self.D * self.Ts_adm) - self.M * self.theta_last) / (self.M + self.D * self.Ts_adm + self.K * self.Ts_adm**2)
-        self.theta = np.clip(self.theta, self.adm_rom[0], self.adm_rom[1])
+        self.vel_prev = self.vel
+        #self.theta = (tau * self.Ts_adm**2 + self.theta_prev * (2 * self.M + self.D * self.Ts_adm) - self.M * self.theta_last) / (self.M + self.D * self.Ts_adm + self.K * self.Ts_adm**2)
+        #self.theta = np.clip(self.theta, self.adm_rom[0], self.adm_rom[1])
+        self.vel = (tau * self.Ts_adm + self.M * self.vel_prev - self.K*self.Ts_adm * self.theta) / (self.M + self.D * self.Ts_adm)
+        self.theta = self.theta_prev + self.vel * self.Ts_adm
         return self.theta
 
-class system:
+class system: 
     def __init__(self, Ts):
         self.J = 0.1
         self.B = 0.2
@@ -131,7 +136,7 @@ if __name__ == "__main__":
         u = 0.0
         pid = controller()
         pid.J_gain = 0.3
-        Ts = pid.Ts
+        Ts = pid.Ts 
         duration = 20
         num_steps = int(pid.fs * duration)
         time = np.linspace(0, duration, num_steps)
@@ -155,15 +160,16 @@ if __name__ == "__main__":
         for t in time:
             tau = 0
             if 2 < t < 3:
-                tau = 5
+                tau = 10
             elif 3 <= t < 5:
-                tau = 0 
+                tau = 0  
             elif 10 <= t:
-                tau = -3
+                tau = -5
+            tau = tau + np.random.normal(0,0.2)
                                
             pid.measured = plant.theta
             if counter % pid.adm_decimation == 0:
-                pid.adjust_Kd(u, plant.B, plant.dtheta, plant.ddtheta)
+                #pid.adjust_Kd(u, plant.B, plant.dtheta, plant.ddtheta)
                 ref_old = ref_new
                 ref_new = pid.admittance_control(tau)
                 pid.update_admittance_parameter()
@@ -204,7 +210,7 @@ if __name__ == "__main__":
         ax[0].axhline(pid.adm_rom[0], color="black", linestyle="--")
         ax[0].axhline(pid.adm_rom[1], color="black", linestyle="--")
         ax[0].plot(time, refhist, color="r", label="Reference angle")
-        ax[0].plot(time, tauhist, color="b", label="Input Torque")
+        #ax[0].plot(time, tauhist, color="b", label="Input Torque")
         ax[0].plot(time, angle, color="g", label="Measured angle")
         # ax[0].plot(time, uhist, color="b", label="Motor command")
         ax[0].set_xlabel("Time [s]")
