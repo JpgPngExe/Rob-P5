@@ -3,13 +3,20 @@ from rclpy.node import Node
 from candle_ros2.srv import GenericPds, AddDevices, SetMode, Generic
 from std_srvs.srv import Trigger
 
-emg =False
+"""
+Hvis EMGen skal initialiseres, skal man køre kommandoen:
+ros2 run exoskeleton setup_node --ros-args -p Setup_Node:emg
+Komando efter ROS2 run:   --ros-args -p Setup_Node:emg:=true
+"""
 
 class SetupNode(Node):
 
     def __init__(self):
         super().__init__('Setup_Node')
-        
+
+        self.declare_parameter("emg", False)
+        emg = self.get_parameter("emg").value
+
         self.pds_id = 100
         self.ps_module = 2
         self.mds_id = 17
