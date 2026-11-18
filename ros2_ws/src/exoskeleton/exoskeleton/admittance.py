@@ -63,8 +63,8 @@ class AdmittanceNode(Node):
         self.motor_timer = self.create_timer(self.Ts, self.motor_timer_callback)  
 
     def update_parameters(self):
-        dist_lower = self.theta - self.rom[0]
-        dist_upper = self.rom[1] - self.theta
+        dist_lower = self.theta_measured - self.rom[0]
+        dist_upper = self.rom[1] - self.theta_measured
         if dist_lower < self.buffer:
             x = 1.0 - max(dist_lower, 0.0) / self.buffer
             factor = self.factor_coefficient * (1.0 - np.cos(x * np.pi))
@@ -82,7 +82,7 @@ class AdmittanceNode(Node):
         self.theta_prev = self.theta
         self.vel_prev = self.vel
         #self.theta = (self.tau * self.Ts**2 + self.theta_prev * (2*self.M + self.B * self.Ts) - self.M * self.theta_last) / (self.M + self.B * self.Ts + self.K * self.Ts**2)
-        self.vel = (self.tau + self.M * self.vel_prev - self.K*self.Ts * self.theta_measured) / (self.M + self.B * self.Ts)
+        self.vel = (self.tau * self.Ts + self.M * self.vel_prev - self.K*self.Ts * self.theta_measured) / (self.M + self.B * self.Ts)
         self.theta = self.theta_prev + self.vel * self.Ts
         self.theta = np.clip(self.theta, self.rom[0], self.rom[1])
         
