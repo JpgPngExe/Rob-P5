@@ -27,7 +27,10 @@ setup(
             'admittance = exoskeleton.admittance:main',
             'setup = exoskeleton.setup_node:main',
             'feature_extraction = exoskeleton.feature_extraction:main',
-            'classification = exoskeleton.classification:main'
+            'classification = exoskeleton.classification:main',
+            'read_emg = exoskeleton.read_emg:main',
+            'signal_processing = exoskeleton.signal_processing:main',
+            'time_sync = exoskeleton.time_synchronizer:main'
         ],
     },
 )

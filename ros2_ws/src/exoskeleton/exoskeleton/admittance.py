@@ -71,9 +71,9 @@ class AdmittanceNode(Node):
         self.admittance()
         msg = MotionCmd()
         msg.device_ids = [17]
-        msg.target_position = [self.theta]
-        msg.target_velocity = [1]
-        msg.target_torque = [1]
+        msg.target_position = [0.0]
+        msg.target_velocity = [self.vel]
+        msg.target_torque = [0.0]
         self.publish_motor_command.publish(msg)
         self.get_logger().info(f"Publishing: {msg}")
 

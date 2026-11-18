@@ -3,7 +3,7 @@ from rclpy.node import Node
 from candle_ros2.srv import GenericPds, AddDevices, SetMode, Generic
 from std_srvs.srv import Trigger
 
-emg =False
+emg = False
 
 class SetupNode(Node):
 
@@ -13,7 +13,7 @@ class SetupNode(Node):
         self.pds_id = 100
         self.ps_module = 2
         self.mds_id = 17
-        self.mds_mode = "POSITION_PID"
+        self.mds_mode = "VELOCITY_PID"
         self.initialisation_motor_complete = False
         self.initialisation_emg_complete = False
         if not emg:
