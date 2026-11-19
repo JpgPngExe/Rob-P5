@@ -1,10 +1,8 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
 from interfaces.msg import IMU
 import serial
-from message_filters import Subscriber, ApproximateTimeSynchronizer
-from rclpy.clock import Clock
+from builtin_interfaces.msg import Time
 
 
 class SerialPublisher(Node):
@@ -14,7 +12,7 @@ class SerialPublisher(Node):
         self.arduinoData = serial.Serial('/dev/ttyACM0',115200,)
         # Create publisher for arduino output
         self.publisher = self.create_publisher(IMU,'arduino_output', 10)
-        timer_period = 0.0001  # seconds
+        timer_period = 0.01  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
 
@@ -23,30 +21,47 @@ class SerialPublisher(Node):
     def timer_callback(self):
         line = self.arduinoData.readline()
         text = line.decode('utf-8', errors='replace').strip()
-        imu = String()
+        if not text:
+            return
+        #imu = String()
 
         #sync stuff
-        self.now = Clock().now().to_msg()
-        imu.header.stamp = self.now
+        #self.now = Clock().now().to_msg()
+        #imu.header.stamp = self.now
 
 
         #self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, text="{text}"')
-        imu.data = text
-        self.publisher.publish(imu)
-        values = [float(x) for x in text.split(',')]
+        #imu.data = text
+        #self.publisher.publish(imu)
+        try:
+            values = [float(x) for x in text.split(',')]
+        except ValueError:
+            self.get_logger().warning(f"Invalid serial data: {text!r}")
+            return
+        if len(values) != 11:
+            self.get_logger().warning(f"Expected 11 values, got {len(values)}")
+            return
+
         msg = IMU()
-        msg.orientation.x = values[0]
-        msg.orientation.y = values[1]
-        msg.orientation.z = values[2]
-        msg.orientation.w = values[3]
-        msg.angular_velocity.x = values[4]
-        msg.angular_velocity.y = values[5]
-        msg.angular_velocity.z = values[6]
-        msg.linear_acceleration.x = values[7]
-        msg.linear_acceleration.y = values[8]
-        msg.linear_acceleration.z = values[9]
-        msg.header.stamp = values[10]
+        msg.imu.orientation.x = float(values[0])
+        msg.imu.orientation.y = float(values[1])
+        msg.imu.orientation.z = float(values[2])
+        msg.imu.orientation.w = float(values[3])
+        msg.imu.angular_velocity.x = float(values[4])
+        msg.imu.angular_velocity.y = float(values[5])
+        msg.imu.angular_velocity.z = float(values[6])
+        msg.imu.linear_acceleration.x = float(values[7])
+        msg.imu.linear_acceleration.y = float(values[8])
+        msg.imu.linear_acceleration.z = float(values[9])
+        epoch = float(values[10])
+        stamp = Time()
+        stamp.sec = int(epoch)
+        stamp.nanosec = int((epoch - stamp.sec) * 1000000000)
+        msg.imu.header.stamp = stamp
         self.publisher.publish(msg)
+        #self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, msg="{msg}"')
+        
+
 
 def main(args=None):
     rclpy.init(args=args)

@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from std_srvs.srv import Trigger
 from mindrove.board_shim import BoardShim, BoardIds, MindRoveInputParams
-from interfaces.msg import MultiArray
+from interfaces.msg import MultiArrayTime
 
 class read_emg(Node):
     def __init__(self):
@@ -43,7 +43,7 @@ class read_emg(Node):
 
         # Create a publisher for the EMG data
         self.raw_emg_publisher = self.create_publisher(
-            MultiArray, 
+            MultiArrayTime, 
             self.output_topic, 
             10
         )
@@ -101,8 +101,8 @@ class read_emg(Node):
             # Preserve the SDK timestamp of the last sample, not publishing time
             latest_timestamp = data[self.timestamp_channel, -1]
 
-            # Create a MultiArray message to publish the EMG data
-            msg = MultiArray()
+            # Create a MultiArrayTime message to publish the EMG data
+            msg = MultiArrayTime()
             msg.rows = int(emg_data.shape[0])
             msg.cols = int(emg_data.shape[1])
             msg.data = emg_data.flatten().tolist()

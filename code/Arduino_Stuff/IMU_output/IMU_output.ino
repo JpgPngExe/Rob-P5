@@ -139,7 +139,7 @@ const char *password = "46402516";
 const char *ntpServer = "pool.ntp.org";
 const long gmtOffset_sec = 3600;      // GMT+1, same offset as the original page
 const int daylightOffset_sec = 0;     // adjust if DST is needed
-
+struct timeval tv;
 
 //#define INTERRUPT_PIN 2  // use pin 2 on Arduino Uno & most boards
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
@@ -330,6 +330,7 @@ void setup() {
     time_t now = time(nullptr);
     rtc.setTime(now);
     Serial.println("Time synced over NTP.");
+    
 
     // Wi-Fi is no longer needed
     WiFi.disconnect(true);
@@ -401,6 +402,7 @@ void loop() {
             // Get quaternions from both IMUs
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu2.dmpGetQuaternion(&q2, fifoBuffer2);
+            gettimeofday(&tv, nullptr);
 
             // Normalize both quaternions
             q.normalize();
@@ -489,8 +491,13 @@ void loop() {
             Serial.print(",");
             Serial.print((accRel.z / 16384.0) * 9.80665);
             Serial.print(",");
-            Serial.printf("%lu.%03lu\n",
-                  rtc.getLocalEpoch(), rtc.getMicros());
+
+            Serial.printf("%lld.%06ld\n",
+                        (long long)tv.tv_sec,
+                        (long)tv.tv_usec);
+            
+            //Serial.printf("%lu.%06lu\n",
+            //      rtc.getLocalEpoch(), rtc.getMicros());
             
         #endif
 

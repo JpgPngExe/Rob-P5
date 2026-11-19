@@ -19,6 +19,14 @@ def generate_launch_description():
             description="Path to exoskeleton parameter YAML file",
         )
 
+    emg_arg = DeclareLaunchArgument(
+        "emg",
+        default_value = "false",
+        description = 'Enable or Disable EMG'
+    )
+    emg = LaunchConfiguration("emg")
+
+
     candle_node = Node(
         package='candle_ros2',
         executable='candle_container',
@@ -31,7 +39,7 @@ def generate_launch_description():
         executable = 'setup',
         name = 'setup',
         output = 'screen',
-        parameters=[config_file]
+        parameters=[config_file, {'emg': emg}]
     )
 
     emg_node = Node(
@@ -108,6 +116,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         config_arg,
+        emg_arg,
         candle_node,
         remaining_nodes
 

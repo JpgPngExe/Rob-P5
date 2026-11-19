@@ -24,7 +24,7 @@ class AdmittanceNode(Node):
         self.declare_parameter("EMG", "/exo/processed_EMG")
 
         self.M = self.get_parameter("Virtual_mass").value
-        self.base_K = self.K = self.get_parameter("Base_K").value
+        self.base_K = self.get_parameter("Base_K").value
         self.max_K = self.get_parameter("Max_K").value
         self.Ts = self.get_parameter("Controller_update_rate").value
         self.rom = np.deg2rad(self.get_parameter("Range_of_motion").value)
@@ -39,6 +39,7 @@ class AdmittanceNode(Node):
         
         self.tau = 0.0
         self.B = 1.0
+        self.K = 0.0
         self.theta = 0.0
         self.theta_prev = 0.0
         self.theta_last = 0.0

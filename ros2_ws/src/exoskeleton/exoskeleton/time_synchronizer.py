@@ -39,16 +39,16 @@ class Time_synchronizer(Node):
         emg_msg.header = self.counter
 
         imu_msg = IMU()
-        imu_msg.orientation.x = imu.orientation.x
-        imu_msg.orientation.y = imu.orientation.y
-        imu_msg.orientation.z = imu.orientation.z
-        imu_msg.orientation.w = imu.orientation.w
-        imu_msg.angular_velocity.x = imu.angular_velocity.x
-        imu_msg.angular_velocity.y = imu.angular_velocity.y
-        imu_msg.angular_velocity.z = imu.angular_velocity.z
-        imu_msg.linear_acceleration.x = imu.linear_acceleration.x
-        imu_msg.linear_acceleration.y = imu.linear_acceleration.y
-        imu_msg.linear_acceleration.z = imu.linear_acceleration.z
+        imu_msg.imu.orientation.x = imu.orientation.x
+        imu_msg.imu.orientation.y = imu.orientation.y
+        imu_msg.imu.orientation.z = imu.orientation.z
+        imu_msg.imu.orientation.w = imu.orientation.w
+        imu_msg.imu.angular_velocity.x = imu.angular_velocity.x
+        imu_msg.imu.angular_velocity.y = imu.angular_velocity.y
+        imu_msg.imu.angular_velocity.z = imu.angular_velocity.z
+        imu_msg.imu.linear_acceleration.x = imu.linear_acceleration.x
+        imu_msg.imu.linear_acceleration.y = imu.linear_acceleration.y
+        imu_msg.imu.linear_acceleration.z = imu.linear_acceleration.z
         imu_msg.counter = self.counter
 
         self.EMG_pub.publish(emg_msg)
