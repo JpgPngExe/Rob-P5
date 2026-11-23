@@ -32,7 +32,7 @@ setup(
             'EMG_read = exoskeleton.read_emg:main',
             'signal_processing = exoskeleton.signal_processing:main',
             'time_synchronizer = exoskeleton.time_synchronizer:main',
-            'simulator = exoskeleton.imu_emg_simulator:main'
+            'imu_emg_simulator = exoskeleton.imu_emg_simulator:main'
         ],
     },
 )

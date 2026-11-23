@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 import numpy as np
-from interfaces import MultiArrayTime, IMU
+from interfaces.msg import MultiArrayTime, IMU
 class SimulatorNode(Node):
     def __init__(self):
         super().__init__("Simulator_Node")

@@ -24,7 +24,7 @@ class Feature_extraction(Node):
         self.features = None
         
         self.get_logger().info("Feature Extraction Node Initiated succesfully")
-        self.caounter = 0
+        self.counter = 0
 
     def restructure_data(self, msg):
         try:
@@ -48,7 +48,7 @@ class Feature_extraction(Node):
         return rows, cols, values
     
     def publish_features(self):
-        if self.features == None:
+        if self.features is None:
             return
         try:
             rows, cols, data = self.prepare_data(self.features)
@@ -61,7 +61,7 @@ class Feature_extraction(Node):
         msg.rows = rows
         msg.cols = cols
         msg.data = data
-        msg.data = self.counter
+        msg.counter = self.counter
         try:
             self.feature_publisher.publish(msg)
             self.end = perf_counter_ns()
@@ -115,7 +115,7 @@ class Feature_extraction(Node):
         self.start = perf_counter_ns()
         self.get_logger().debug("Message recieved")
         data = self.restructure_data(msg)
-        self.counter = msg.header
+        self.counter = msg.counter
         self.features = self.feature_extraction(data)
         self.get_logger().debug("Features extracted")
         self.publish_features()

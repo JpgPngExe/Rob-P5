@@ -11,9 +11,9 @@ class signal_processing(Node):
 
         self.sampling_rate = BoardShim.get_sampling_rate(BoardIds.MINDROVE_WIFI_BOARD)   # Sampling rate in Hz
         self.n_channels = 8                                                              # Number of EMG channels
-
+        self.counter = 0.0
         # Declare parameters for topics and segmentation
-        self.declare_parameter('input_topic', '/exo/raw_EMG')
+        self.declare_parameter('input_topic', '/exo/synced_EMG')
         self.declare_parameter('output_topic', '/exo/processed_EMG')
         self.declare_parameter('window_ms', 200.0)     # Length of each window in ms
         #self.declare_parameter('increment_ms', 50.0)   # Time between two windows in ms (50 ms = 20 Hz)
@@ -107,7 +107,7 @@ class signal_processing(Node):
         self.start = perf_counter_ns()
         try:
             emg_data = self.restructure_data(msg) 
-            header = msg.header 
+            counter = msg.counter 
             # Skip blocks without samples
             if emg_data.shape[1] == 0:
                 return
@@ -119,7 +119,7 @@ class signal_processing(Node):
             self.buffer = np.roll(self.buffer, -n_new, axis=1)
             self.buffer[:, -n_new:] = filtered
 
-            self.publish_window(header)
+            self.publish_window(counter)
             self.get_logger().debug(f'Processed EMG block with {n_new} samples, buffer now has {self.buffer.shape[1]} samples')
 
         except Exception as e:
@@ -139,9 +139,9 @@ class signal_processing(Node):
             msg.rows = rows
             msg.cols = cols
             msg.data = values
-            msg.header = header
+            msg.counter = header
             self.processed_emg_publisher.publish(msg)
-            self.end = perf_counter_ns
+            self.end = perf_counter_ns()
             self.get_logger().debug(f'Published EMG window with {rows} rows and {cols} columns')
             self.get_logger().debug(f"Signal Processing node cycle time: ({((self.end - self.start)*1e6):.3f} ms")
 

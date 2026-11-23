@@ -95,7 +95,6 @@ def generate_launch_description():
     remaining_nodes = TimerAction(
     period=3.0,
     actions=[
-        setup_node,
         simulator_node,
         synchronizer_node,
         processing_node,
@@ -107,9 +106,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         config_arg,
-        emg_arg,
         foxglove_bridge,
-        candle_node,
         remaining_nodes
     ])
 

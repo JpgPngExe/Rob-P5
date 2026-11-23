@@ -15,47 +15,47 @@ admittance:
       Motion_command_topic: "/md/motion_command"
       Torque_estimator: "/Torque_estimator"
 
-classification:
-  ros__parameters:
-      ML_Model:
-      Update_rate: 0.05
-      Confidence_threshold: 0.7
-      Subscriber: "/exo/extracted_features"
-      Publisher: "/exo/classification"
+# classification:
+#   ros__parameters:
+#       ML_Model:
+#       Update_rate: 0.05
+#       Confidence_threshold: 0.7
+#       Subscriber: "/exo/extracted_features"
+#       Publisher: "/exo/classification"
 
-feature_extraction:
-  ros__parameters:
-    Extraction_rate: 0.1
-    Wamp_threshold: 1
-    ssc_threshold: 1
-    Processed_EMG: "/Processed_EMG"
-    Extracted_features: "/Extracted_features"
+# feature_extraction:
+#   ros__parameters:
+#     Extraction_rate: 0.1
+#     Wamp_threshold: 1
+#     ssc_threshold: 1
+#     Processed_EMG: "/Processed_EMG"
+#     Extracted_features: "/Extracted_features"
 
-read_emg:
-  ros__parameters:
-    output_topic: '/exo/raw_EMG'
-    read_period: 0.05
+# read_emg:
+#   ros__parameters:
+#     output_topic: '/exo/raw_EMG'
+#     read_period: 0.05
 
-read_imu:
-  ros__parameters:
+# read_imu:
+#   ros__parameters:
 
-setup_node:
-  ros__parameters:
-    emg: False
+# setup_node:
+#   ros__parameters:
+#     emg: False
     
 
-signal_processing:
-  ros__parameters:
-    input_topic: "/exo/raw_EMG"
-    output_topic: "/exo/processed_EMG"
+# signal_processing:
+#   ros__parameters:
+#     input_topic: "/exo/raw_EMG"
+#     output_topic: "/exo/processed_EMG"
     
 
-time_synchronizer:
-  ros__parameters:
-    Queue_size: 10
-    Max_delay: 0.005
-    EMG_publisher: "/exo/synced_EMG"
-    IMU_publisher: "/exo/synced_IMU"
-    EMG_subscriber:
-    IMU_subscriber:
+# time_synchronizer:
+#   ros__parameters:
+#     Queue_size: 10
+#     Max_delay: 0.005
+#     EMG_publisher: "/exo/synced_EMG"
+#     IMU_publisher: "/exo/synced_IMU"
+#     EMG_subscriber:
+#     IMU_subscriber:
 
