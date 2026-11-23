@@ -18,7 +18,7 @@ class Classification(Node):
         self.declare_parameter("Publisher", "/exo/classification")
         
    
-        #self.model = load(self.get_parameter("ML_Model").value)
+        self.model = load(self.get_parameter("ML_Model").value)
         self.QOS = self.get_parameter("QOS").value
         self.timer = self.get_parameter("Update_rate").value
         self.confidence_threshold = self.get_parameter("Confidence_threshold").value

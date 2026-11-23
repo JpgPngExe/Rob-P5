@@ -15,26 +15,26 @@ admittance:
       Motion_command_topic: "/md/motion_command"
       Torque_estimator: "/Torque_estimator"
 
-# classification:
-#   ros__parameters:
-#       ML_Model:
-#       Update_rate: 0.05
-#       Confidence_threshold: 0.7
-#       Subscriber: "/exo/extracted_features"
-#       Publisher: "/exo/classification"
+classification:
+  ros__parameters:
+      ML_Model: 'Files/ML models/gesture_model.pkl'
+      Update_rate: 0.05
+      Confidence_threshold: 0.7
+      Subscriber: "/exo/extracted_features"
+      Publisher: "/exo/classification"
 
-# feature_extraction:
-#   ros__parameters:
-#     Extraction_rate: 0.1
-#     Wamp_threshold: 1
-#     ssc_threshold: 1
-#     Processed_EMG: "/Processed_EMG"
-#     Extracted_features: "/Extracted_features"
+feature_extraction:
+  ros__parameters:
+    Extraction_rate: 0.1
+    Wamp_threshold: 1
+    ssc_threshold: 1
+    Processed_EMG: "/Processed_EMG"
+    Extracted_features: "/Extracted_features"
 
-# read_emg:
-#   ros__parameters:
-#     output_topic: '/exo/raw_EMG'
-#     read_period: 0.05
+read_emg:
+  ros__parameters:
+    output_topic: '/exo/raw_EMG'
+    read_period: 0.05
 
 # read_imu:
 #   ros__parameters:
