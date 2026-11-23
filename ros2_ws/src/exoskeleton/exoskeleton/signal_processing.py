@@ -4,7 +4,7 @@ import numpy as np
 from scipy import signal
 from mindrove.board_shim import BoardShim, BoardIds
 from interfaces.msg import MultiArray
-
+from time import perf_counter_ns
 class signal_processing(Node):
     def __init__(self):
         super().__init__('Signal_Processing')
@@ -104,7 +104,7 @@ class signal_processing(Node):
 
     def process_emg_callback(self, msg):
         """Receive and filter a block of EMG data and add it to the buffer"""
-
+        self.start = perf_counter_ns()
         try:
             emg_data = self.restructure_data(msg) 
             header = msg.header 
@@ -141,8 +141,9 @@ class signal_processing(Node):
             msg.data = values
             msg.header = header
             self.processed_emg_publisher.publish(msg)
-
+            self.end = perf_counter_ns
             self.get_logger().debug(f'Published EMG window with {rows} rows and {cols} columns')
+            self.get_logger().debug(f"Signal Processing node cycle time: ({((self.end - self.start)*1e6):.3f} ms")
 
         except Exception as e:
             self.get_logger().error(f'Failed to publish EMG window: {e}')

@@ -3,6 +3,8 @@ from rclpy.node import Node
 from std_srvs.srv import Trigger
 from mindrove.board_shim import BoardShim, BoardIds, MindRoveInputParams
 from interfaces.msg import MultiArrayTime
+from builtin_interfaces.msg import Time
+import math, time
 
 class read_emg(Node):
     def __init__(self):
@@ -74,7 +76,7 @@ class read_emg(Node):
             response.message = "Connected to MindRove successfully"  
 
             self.get_logger().info('EMG_Read have started EMG stream')  
-
+            
         except Exception as e:    
             # If the connection fails, set the response to indicate failure and log the error        
             response.success = False
@@ -93,6 +95,7 @@ class read_emg(Node):
         try:
             # Get the latest data from the MindRove board
             data = self.mindrove_connection.get_board_data()
+            now_ns = time.time_ns()
             if data.shape[1] == 0:
                 return
 
@@ -106,10 +109,18 @@ class read_emg(Node):
             msg.rows = int(emg_data.shape[0])
             msg.cols = int(emg_data.shape[1])
             msg.data = emg_data.flatten().tolist()
-            msg.timestamp = float(latest_timestamp)
+
+            epoch = float(latest_timestamp)
+            stamp = Time()
+            stamp.sec = math.floor(epoch)
+            stamp.nanosec = math.floor((epoch - stamp.sec) * 1000000000)
+            msg.header.stamp = stamp
+
             self.raw_emg_publisher.publish(msg)
 
             self.get_logger().debug(f'Published EMG data from timestamp {latest_timestamp}')
+            self.get_logger().debug(f"Time between collecting EMG Window and ROS gets the data {now_ns - (msg.header.stamp.sec * 1_000_000_000
+                        + msg.header.stamp.nanosec)}")
 
         except Exception as e:
             self.get_logger().error(f'Failed to read or publish EMG: {e}')

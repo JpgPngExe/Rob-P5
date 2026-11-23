@@ -71,6 +71,9 @@ RUN apt update && apt install -y \
 RUN rosdep init || true
 RUN rosdep update
 
+RUN apt update && apt install -y \
+    ros-jazzy-foxglove-bridge
+
 
 # Python packages
 RUN pip install --no-cache-dir \

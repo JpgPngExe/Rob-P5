@@ -3,7 +3,7 @@ from interfaces.msg import MultiArray, Int8WithHeader
 import numpy as np
 from rclpy.node import Node
 from joblib import load
-from time import perf_counter
+from time import perf_counter_ns
 from std_msgs.msg import Int8
 
 class Classification(Node):
@@ -50,15 +50,17 @@ class Classification(Node):
         msg.data = int(self.class_)
         msg.header = self.counter
         self.publisher_.publish(msg)
+        self.end = perf_counter_ns()
+        self.get_logger().debug(f"Classification node cycle time: ({((self.end - self.start)*1e6):.3f} ms")
 
     def feature_callback(self, msg):
+        self.start = perf_counter_ns()
         self.data = self.restructure_data(msg)
         self.counter = msg.header
         try:
-            start = perf_counter()
+            
             proba = self.model.predict_proba(self.data)[0]
-            end = perf_counter
-            self.get_logger().debug(f"Prediction time: {(end - start)*1000} ms")
+            
         except Exception as e:
             self.get_logger().error(f"ERROR: {e}")
             self.get_logger().error("Prediction failed")

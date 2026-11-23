@@ -26,6 +26,13 @@ def generate_launch_description():
     )
     emg = LaunchConfiguration("emg")
 
+    foxglove_bridge = Node(
+        package='foxglove_bridge',
+        executable='foxglove_bridge',
+        name='foxglove_bridge',
+        output='screen',
+    )
+
 
     candle_node = Node(
         package='candle_ros2',
@@ -117,9 +124,9 @@ def generate_launch_description():
     return LaunchDescription([
         config_arg,
         emg_arg,
+        foxglove_bridge,
         candle_node,
         remaining_nodes
-
     ])
 
         

@@ -6,7 +6,7 @@ from std_srvs.srv import Trigger
 import time
 """
 Hvis EMGen skal initialiseres, skal man køre kommandoen:
-ros2 run exoskeleton setup_node --ros-args -p Setup_Node:emg
+ros2 run exoskeleton setup_node
 Komando efter ROS2 run:   --ros-args -p Setup_Node:emg:=true
 """
 

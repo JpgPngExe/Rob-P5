@@ -2,7 +2,7 @@ import rclpy
 import numpy as np
 from rclpy.node import Node
 from interfaces.msg import MultiArray
-
+from time import perf_counter_ns
 class Feature_extraction(Node):
     def __init__(self):
         super().__init__('Feature_extraction_Node')
@@ -64,6 +64,7 @@ class Feature_extraction(Node):
         msg.data = self.counter
         try:
             self.feature_publisher.publish(msg)
+            self.end = perf_counter_ns()
         except Exception as e:
             self.get_logger().error("Failed to publish message")
             self.get_logger().error(f"Error: {e}")
@@ -111,6 +112,7 @@ class Feature_extraction(Node):
         return features
     
     def emg_callback(self,msg):
+        self.start = perf_counter_ns()
         self.get_logger().debug("Message recieved")
         data = self.restructure_data(msg)
         self.counter = msg.header

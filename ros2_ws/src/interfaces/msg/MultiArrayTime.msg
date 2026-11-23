@@ -1,4 +1,4 @@
 uint32 rows
 uint32 cols
-float64 time
-float32[] data
+std_msgs/Header header
+float64[] data

@@ -5,7 +5,7 @@ from candle_ros2.msg import MotionCmd
 from std_msgs.msg import Float32
 from interfaces.msg import Int8WithHeader, IMU, MultiArray
 from scipy.spatial.transform import Rotation
-
+from time import perf_counter_ns
 class AdmittanceNode(Node):
     def __init__(self):
         super().__init__('Admittance_Node')
@@ -96,7 +96,9 @@ class AdmittanceNode(Node):
         msg.target_velocity = [self.vel]
         msg.target_torque = [0.0]
         self.publish_motor_command.publish(msg)
+        self.stop = perf_counter_ns
         self.get_logger().info(f"Publishing: {msg}")
+        self.get_logger().debug(f"Admittance Node Cycle time {((self.stop - self.start) / 1e6):.3f}")
 
     def torque_estimator_callback(self,msg):
         self.get_logger().info(f"Recieved {msg.data}")
@@ -130,7 +132,7 @@ class AdmittanceNode(Node):
 
     def check_sync(self, counter):
         if counter in self.imu_buffer and counter in self.classification_buffer and counter in self.emg_buffer:
-
+            self.start = perf_counter_ns
             classification_msg = self.classification_buffer.pop(counter)
             imu_msg = self.imu_buffer.pop(counter)
             emg_msg = self.emg_buffer.pop(counter)
