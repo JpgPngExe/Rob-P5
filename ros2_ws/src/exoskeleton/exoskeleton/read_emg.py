@@ -5,6 +5,10 @@ from mindrove.board_shim import BoardShim, BoardIds, MindRoveInputParams
 from interfaces.msg import MultiArrayTime
 from builtin_interfaces.msg import Time
 import math, time
+"""
+Ved selvstændig test kan noden startes med --ros-args -p node_test:=true
+"""
+
 
 class read_emg(Node):
     def __init__(self):
@@ -19,10 +23,12 @@ class read_emg(Node):
         # Declare parameters for sampling rate and output topic
         self.declare_parameter('output_topic', '/exo/raw_EMG')
         self.declare_parameter('read_period', 0.05)
+        self.declare_parameter('node_test', False)
 
         # Get the parameter values
         self.output_topic = self.get_parameter('output_topic').get_parameter_value().string_value
         self.read_period = self.get_parameter('read_period').get_parameter_value().double_value
+        self.node_test = self.get_parameter('node_test').get_parameter_value().bool_value
 
         # Create a publisher for the EMG data
         self.board_id = BoardIds.MINDROVE_WIFI_BOARD
@@ -50,8 +56,34 @@ class read_emg(Node):
             10
         )
 
+        if self.node_test:
+            self.test_connect_mindrove()
+            self.get_logger().info('EMG stram started in test mode')
+
         self.get_logger().info('Read EMG Node has been started')
-        
+
+    def test_connect_mindrove(self):
+        try:
+            # Create a connection to the MindRove board
+            parameters = MindRoveInputParams()
+            parameters.ip_address = "192.168.4.2"
+
+            # Create a connection to the MindRove board
+            self.mindrove_connection = BoardShim(BoardIds.MINDROVE_WIFI_BOARD, parameters)
+            self.mindrove_connection.prepare_session()
+            self.mindrove_connection.start_stream()
+
+            # Start the timer to read data from the MindRove at the specified period    
+            self.streaming = True
+            self.read_timer.reset()
+
+            self.get_logger().info('EMG_Read have started EMG stream')  
+
+        except Exception as e:    
+            # If the connection fails, set the response to indicate failure and log the error        
+            self.get_logger().error(f"Failed to connect to MindRove: {e}")
+        return
+
     def connect_mindrove(self, request, response):
         if self.streaming:
             response.success = True
