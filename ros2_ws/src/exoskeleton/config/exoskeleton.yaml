@@ -3,7 +3,7 @@
   ros__parameters:
       Quality_of_service: 10
 
-admittance:
+Admittance_Node:
   ros__parameters:
       Virtual_mass: 1.0
       Base_K: 0.1
@@ -15,7 +15,7 @@ admittance:
       Motion_command_topic: "/md/motion_command"
       Torque_estimator: "/Torque_estimator"
 
-classification:
+Classification_Node:
   ros__parameters:
       ML_Model:
       Update_rate: 0.05
@@ -23,7 +23,7 @@ classification:
       Subscriber: "/exo/extracted_features"
       Publisher: "/exo/classification"
 
-feature_extraction:
+Feature_extraction_Node:
   ros__parameters:
     Extraction_rate: 0.1
     Wamp_threshold: 1
@@ -31,26 +31,26 @@ feature_extraction:
     Processed_EMG: "/Processed_EMG"
     Extracted_features: "/Extracted_features"
 
-read_emg:
+Read_EMG:
   ros__parameters:
     output_topic: '/exo/raw_EMG'
     read_period: 0.05
 
-read_imu:
-  ros__parameters:
+#read_imu:
+#  ros__parameters:
 
-setup_node:
+Setup_Node:
   ros__parameters:
     emg: False
     
 
-signal_processing:
+Signal_Processing:
   ros__parameters:
     input_topic: "/exo/raw_EMG"
     output_topic: "/exo/processed_EMG"
     
 
-time_synchronizer:
+Time_synchronizer:
   ros__parameters:
     Queue_size: 10
     Max_delay: 0.005
