@@ -25,6 +25,7 @@ def generate_launch_description():
         executable='foxglove_bridge',
         name='foxglove_bridge',
         output='screen',
+        arguments=['--ros-args', '--log-level', 'warn']
     )
 
 

@@ -36,6 +36,7 @@ class SetupNode(Node):
         self.enable_mds_client = self.create_client(Generic, "/md/enable")
         self.velocity_pid_pub = self.create_publisher(VelocityPidCmd,'/md/velocity_command',10)
         self.motion_publisher = self.create_publisher(MotionCmd,'/md/motion_command',10)
+        self.get_logger().info("Recieved argument emg: " + str(emg))
         self.add_pds()
 
         # Create a client to call the start_emg service in Read_EMG

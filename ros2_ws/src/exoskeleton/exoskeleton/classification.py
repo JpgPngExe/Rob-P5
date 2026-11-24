@@ -1,5 +1,5 @@
 import rclpy
-from interfaces.msg import MultiArray, Int8WithHeader
+from interfaces.msg import MultiArray, Int8WithCounter
 import numpy as np
 from rclpy.node import Node
 from joblib import load
@@ -27,8 +27,9 @@ class Classification(Node):
 
 
         self.subcriber_ = self.create_subscription(MultiArray, self.subscriber_topic,self.feature_callback, self.QOS)
-        self.publisher_ = self.create_publisher(Int8WithHeader, self.publisher_topic, self.QOS)
+        self.publisher_ = self.create_publisher(Int8WithCounter, self.publisher_topic, self.QOS)
         #self.classification_timer = self.create_timer(self.timer,  self.classification_callback)
+        self.get_logger().info(f"Classification node initialized with model: {self.get_parameter('ML_Model').value}")
 
 
         self.data = None
@@ -46,7 +47,7 @@ class Classification(Node):
         return data
     
     def classification_callback(self):
-        msg = Int8WithHeader()
+        msg = Int8WithCounter()
         msg.data = int(self.class_)
         msg.counter = self.counter
         self.publisher_.publish(msg)
@@ -59,7 +60,7 @@ class Classification(Node):
         self.counter = msg.counter
         try:
             
-            proba = self.model.predict_proba(self.data)[0]
+            proba = self.model.predict_proba(self.data.flatten().reshape(1, -1))[0]
             
         except Exception as e:
             self.get_logger().error(f"ERROR: {e}")

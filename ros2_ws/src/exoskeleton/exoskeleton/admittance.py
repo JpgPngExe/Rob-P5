@@ -3,7 +3,7 @@ import numpy as np
 from rclpy.node import Node
 from candle_ros2.msg import MotionCmd
 from std_msgs.msg import Float32
-from interfaces.msg import Int8WithHeader, IMU, MultiArray
+from interfaces.msg import Int8WithCounter, IMU, MultiArray
 from scipy.spatial.transform import Rotation
 from time import perf_counter_ns
 class AdmittanceNode(Node):
@@ -18,7 +18,6 @@ class AdmittanceNode(Node):
         self.declare_parameter("ROM_buffer", 15)
         self.declare_parameter("Factor_coefficient", 0.5)
         self.declare_parameter("Motion_command_topic", "/md/motion_command")
-        self.declare_parameter("Torque_estimator", "/Torque_estimator")
         self.declare_parameter("Classification", "/exo/classification")
         self.declare_parameter("IMU", "/exo/synced_IMU")
         self.declare_parameter("EMG", "/exo/processed_EMG")
@@ -32,7 +31,6 @@ class AdmittanceNode(Node):
         self.buffer = np.deg2rad(self.get_parameter("ROM_buffer").value)
         self.factor_coefficient = self.get_parameter("Factor_coefficient").value
         self.motion_command = self.get_parameter("Motion_command_topic").value
-        self.torque_estimator = self.get_parameter("Torque_estimator").value
         self.classification_topic = self.get_parameter("Classification").value
         self.imu_topic = self.get_parameter("IMU").value
         self.emg_topic = self.get_parameter("EMG").value
@@ -57,10 +55,11 @@ class AdmittanceNode(Node):
 
         self.publish_motor_command = self.create_publisher(MotionCmd, self.motion_command, self.qos)
         self.torque_subsriber = self.create_subscription(Float32, self.torque_estimator, self.torque_estimator_callback, self.qos)
-        self.classification_subscriber = self.create_subscription(Int8WithHeader, self.classification_topic, self.classification_callback, self.qos)
+        self.classification_subscriber = self.create_subscription(Int8WithCounter, self.classification_topic, self.classification_callback, self.qos)
         self.imu_subscriber = self.create_subscription(IMU, self.imu_topic, self.imu_callback, self.qos)
         self.processed_emg_subscriber = self.create_subscription(MultiArray, self.emg_topic, self.emg_callback, self.qos)
         self.motor_timer = self.create_timer(self.Ts, self.motor_timer_callback)  
+        self.get_logger().info("Admittance node initialized")
 
     def update_parameters(self):
         dist_lower = self.theta_measured - self.rom[0]
@@ -100,15 +99,12 @@ class AdmittanceNode(Node):
         msg.target_torque = [0.0]
         self.publish_motor_command.publish(msg)
         self.stop = perf_counter_ns()
-        self.get_logger().info(f"Publishing: {msg}")
+        self.get_logger().debug(f"Publishing: {msg}")
         self.get_logger().debug(f"Admittance Node Cycle time {((self.stop - self.start) / 1e6):.3f}")
 
-    def torque_estimator_callback(self,msg):
-        self.get_logger().info(f"Recieved {msg.data}")
-        self.tau = msg.data
 
     def classification_callback(self, msg):
-        counter = msg.header    
+        counter = msg.counter    
         self.classification_buffer[counter] = msg        
         self.check_sync(counter)
 
@@ -141,14 +137,14 @@ class AdmittanceNode(Node):
             emg_msg = self.emg_buffer.pop(counter)
 
             temp = classification_msg.data
-            if temp == 0:
+            if temp == 0 or temp == -1:
                 self.classification = 0
             elif temp == 1:
                 self.classification = 1
             elif temp == 2:
                 self.classification = -1
 
-            q = imu_msg.orientation
+            q = imu_msg.imu.orientation
             r = Rotation.from_quat([q.x,q.y,q.z,q.w])
             roll = r.as_euler('xyz', degrees=False)[0]
             self.theta_measured = roll

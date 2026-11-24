@@ -13,6 +13,7 @@ class SimulatorNode(Node):
         self.create_timer(timer_period, self.timer_callback)
         self.data = np.zeros([8,25])
         self.emg_channels = 8
+        self.get_logger().info("EMG and IMU Simulator node initialized")
 
     def timer_callback(self):
             for i in range(8):

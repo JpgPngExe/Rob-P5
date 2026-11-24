@@ -31,6 +31,7 @@ def generate_launch_description():
         executable='foxglove_bridge',
         name='foxglove_bridge',
         output='screen',
+        arguments=['--ros-args', '--log-level', 'warn']
     )
 
 
@@ -44,7 +45,7 @@ def generate_launch_description():
     setup_node = Node(
         package = 'exoskeleton',
         executable = 'setup',
-        name = 'setup',
+        name = 'Setup_Node',
         output = 'screen',
         parameters=[config_file, {'emg': emg}]
     )
@@ -52,7 +53,7 @@ def generate_launch_description():
     emg_node = Node(
         package = 'exoskeleton',
         executable = 'EMG_read',
-        name = 'EMG_read',
+        name = 'Read_EMG',
         output = 'screen',
         parameters=[config_file]
     )
@@ -64,18 +65,11 @@ def generate_launch_description():
         output = 'screen',
         parameters=[config_file]
     )
-    imu_offset = Node(
-        package = 'arduino_output',
-        executable = 'imu_offset',
-        name = 'imu_offset', 
-        output = 'screen',
-        parameters=[config_file]
-    )
 
     synchronizer_node = Node(
         package = 'exoskeleton',
         executable = 'time_synchronizer',
-        name = 'time_synchronizer',
+        name = 'Time_Synchronizer',
         output = 'screen',
         parameters=[config_file]
     )
@@ -87,7 +81,6 @@ def generate_launch_description():
         setup_node,
         emg_node,
         imu_node,
-        imu_offset,
         synchronizer_node
     ]
 )

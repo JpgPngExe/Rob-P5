@@ -28,8 +28,8 @@ Feature_extraction_Node:
     Extraction_rate: 0.1
     Wamp_threshold: 1
     ssc_threshold: 1
-    Processed_EMG: "/Processed_EMG"
-    Extracted_features: "/Extracted_features"
+    Processed_EMG: "/exo/processed_EMG"
+    Extracted_features: "/exo/extracted_features"
 
 Read_EMG:
   ros__parameters:
@@ -39,10 +39,6 @@ Read_EMG:
 #read_imu:
 #  ros__parameters:
 
-Setup_Node:
-  ros__parameters:
-    emg: False
-    
 
 Signal_Processing:
   ros__parameters:

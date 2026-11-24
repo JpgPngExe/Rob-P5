@@ -12,7 +12,7 @@ class Time_synchronizer(Node):
         self.declare_parameter("EMG_publisher", "/exo/synced_EMG")
         self.declare_parameter("IMU_publisher", "/exo/synced_IMU")
         self.declare_parameter("EMG_subscriber", "/exo/raw_EMG")
-        self.declare_parameter("IMU_subscriber", "/imu/imu_offset")
+        self.declare_parameter("IMU_subscriber", "/imu/raw_imu")
         
         self.QOS = self.get_parameter("QOS").value
         self.queue_size = self.get_parameter("Queue_size").value
@@ -30,6 +30,7 @@ class Time_synchronizer(Node):
         self.time_sync = ApproximateTimeSynchronizer([self.EMG_sub, self.IMU_sub], self.queue_size, self.max_delay)
         self.time_sync.registerCallback(self.SyncCallback)
         self.counter = 0
+        self.get_logger().info("Time Synchronizer node initialized")
 
     def SyncCallback(self, emg, imu):
         emg_msg = MultiArray()
@@ -39,16 +40,7 @@ class Time_synchronizer(Node):
         emg_msg.counter = self.counter
 
         imu_msg = IMU()
-        imu_msg.imu.orientation.x = imu.imu.orientation.x
-        imu_msg.imu.orientation.y = imu.imu.orientation.y
-        imu_msg.imu.orientation.z = imu.imu.orientation.z
-        imu_msg.imu.orientation.w = imu.imu.orientation.w
-        imu_msg.imu.angular_velocity.x = imu.imu.angular_velocity.x
-        imu_msg.imu.angular_velocity.y = imu.imu.angular_velocity.y
-        imu_msg.imu.angular_velocity.z = imu.imu.angular_velocity.z
-        imu_msg.imu.linear_acceleration.x = imu.imu.linear_acceleration.x
-        imu_msg.imu.linear_acceleration.y = imu.imu.linear_acceleration.y
-        imu_msg.imu.linear_acceleration.z = imu.imu.linear_acceleration.z
+        imu_msg.imu = imu.imu
         imu_msg.counter = self.counter
 
         self.EMG_pub.publish(emg_msg)

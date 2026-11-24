@@ -31,7 +31,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/MultiArray.msg"
   "msg/MultiArrayTime.msg"
   "msg/IMU.msg"
-  "msg/Int8WithHeader.msg"
+  "msg/Int8WithCounter.msg"
   DEPENDENCIES sensor_msgs
   DEPENDENCIES std_msgs
 )
