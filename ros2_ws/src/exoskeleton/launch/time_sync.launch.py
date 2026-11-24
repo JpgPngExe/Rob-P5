@@ -64,6 +64,13 @@ def generate_launch_description():
         output = 'screen',
         parameters=[config_file]
     )
+    imu_offset = Node(
+        package = 'arduino_output',
+        executable = 'imu_offset',
+        name = 'imu_offset', 
+        output = 'screen',
+        parameters=[config_file]
+    )
 
     synchronizer_node = Node(
         package = 'exoskeleton',
@@ -80,6 +87,7 @@ def generate_launch_description():
         setup_node,
         emg_node,
         imu_node,
+        imu_offset,
         synchronizer_node
     ]
 )

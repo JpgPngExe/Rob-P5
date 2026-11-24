@@ -7,12 +7,12 @@ class Time_synchronizer(Node):
     def __init__(self):
         super().__init__("Time_synchronizer")
         self.declare_parameter("QOS", 10)
-        self.declare_parameter("Queue_size", 10)
+        self.declare_parameter("Queue_size", 2)
         self.declare_parameter("Max_delay", 0.01)
         self.declare_parameter("EMG_publisher", "/exo/synced_EMG")
         self.declare_parameter("IMU_publisher", "/exo/synced_IMU")
         self.declare_parameter("EMG_subscriber", "/exo/raw_EMG")
-        self.declare_parameter("IMU_subscriber", "arduino_output")
+        self.declare_parameter("IMU_subscriber", "/imu/imu_offset")
         
         self.QOS = self.get_parameter("QOS").value
         self.queue_size = self.get_parameter("Queue_size").value
