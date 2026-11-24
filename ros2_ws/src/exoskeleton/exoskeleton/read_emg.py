@@ -151,8 +151,8 @@ class read_emg(Node):
             self.raw_emg_publisher.publish(msg)
 
             self.get_logger().debug(f'Published EMG data from timestamp {latest_timestamp}')
-            self.get_logger().debug(f"Time between collecting EMG Window and ROS gets the data {now_ns - (msg.header.stamp.sec * 1_000_000_000
-                        + msg.header.stamp.nanosec)}")
+            self.get_logger().debug(f"Time between collecting EMG Window and ROS gets the data {(now_ns - (msg.header.stamp.sec * 1_000_000_000
+                        + msg.header.stamp.nanosec)) / 1e6:.3f} ms")
 
         except Exception as e:
             self.get_logger().error(f'Failed to read or publish EMG: {e}')

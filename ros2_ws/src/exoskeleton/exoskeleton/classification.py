@@ -10,14 +10,14 @@ class Classification(Node):
     def __init__(self):
         super().__init__("Classification_Node")
         
-        self.declare_parameter("ML_Model", None)
+        self.declare_parameter("ML_Model", "")
         self.declare_parameter("QOS", 10)
         self.declare_parameter("Update_rate", 0.05)
         self.declare_parameter("Confidence_threshold", 0.7)
         self.declare_parameter("Subscriber", "/exo/extracted_features")
         self.declare_parameter("Publisher", "/exo/classification")
+
         
-   
         self.model = load(self.get_parameter("ML_Model").value)
         self.QOS = self.get_parameter("QOS").value
         self.timer = self.get_parameter("Update_rate").value

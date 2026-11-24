@@ -64,8 +64,8 @@ class SerialPublisher(Node):
         stamp.nanosec = math.floor((epoch - stamp.sec) * 1e9)
         msg.header.stamp = stamp
         self.publisher.publish(msg)
-        self.get_logger().debug(f"Time between collecting sample IMU and ROS gets the data {now_ns - (msg.header.stamp.sec * 1e9
-            + msg.header.stamp.nanosec)}")
+        self.get_logger().debug(f"Time between collecting sample IMU and ROS gets the data {(now_ns - (msg.header.stamp.sec * 1e9
+           + msg.header.stamp.nanosec)) / 1e6:.3f} ms")
         #self.get_logger().info(f'in_waiting={self.arduinoData.in_waiting}, raw_len={len(line)}, msg="{msg}"')
         
 

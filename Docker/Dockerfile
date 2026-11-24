@@ -85,7 +85,7 @@ RUN pip install --no-cache-dir \
 	catkin_pkg 
 
 
-RUN /usr/bin/python3 -m pip install --no-cache-dir --break-system-packages mindrove joblib
+RUN /usr/bin/python3 -m pip install --no-cache-dir --break-system-packages mindrove joblib scikit-learn
 # Build system
 # -------------------------
 RUN pip install meson

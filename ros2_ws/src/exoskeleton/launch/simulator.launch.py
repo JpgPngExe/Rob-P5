@@ -38,7 +38,7 @@ def generate_launch_description():
     setup_node = Node(
         package = 'exoskeleton',
         executable = 'setup',
-        name = 'setup',
+        name = 'Setup_Node',
         output = 'screen',
         parameters=[config_file]
     )
@@ -46,14 +46,14 @@ def generate_launch_description():
     simulator_node = Node(
         package = 'exoskeleton',
         executable = 'imu_emg_simulator',
-        name = 'imu_emg_simulator',
+        name = 'IMU_EMG_Simulator',
         output = 'screen'
     )
 
     synchronizer_node = Node(
         package = 'exoskeleton',
         executable = 'time_synchronizer',
-        name = 'time_synchronizer',
+        name = 'Time_Synchronizer',
         output = 'screen',
         parameters=[config_file]
     )
@@ -61,7 +61,7 @@ def generate_launch_description():
     processing_node = Node(
         package = 'exoskeleton',
         executable = 'signal_processing',
-        name = 'signal_processing',
+        name = 'Signal_Processing',
         output = 'screen',
         parameters=[config_file]
     )
@@ -69,7 +69,7 @@ def generate_launch_description():
     feature_node = Node(
         package = 'exoskeleton',
         executable = 'feature_extraction',
-        name = 'feature_extraction',
+        name = 'Feature_Extraction_Node',
         output = 'screen',
         parameters=[config_file]
     )
@@ -77,7 +77,7 @@ def generate_launch_description():
     classification_node = Node(
         package = 'exoskeleton',
         executable = 'classification',
-        name = 'classification',
+        name = 'Classification_Node',
         output = 'screen',
         parameters=[config_file]
     )
@@ -85,7 +85,7 @@ def generate_launch_description():
     admittance_node = Node(
         package = 'exoskeleton',
         executable = 'admittance',
-        name = 'admittance',
+        name = 'Admittance_Node',
         output = 'screen',
         parameters=[config_file]
     )
