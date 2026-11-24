@@ -48,7 +48,7 @@ class Classification(Node):
     def classification_callback(self):
         msg = Int8WithHeader()
         msg.data = int(self.class_)
-        msg.header = self.counter
+        msg.counter = self.counter
         self.publisher_.publish(msg)
         self.end = perf_counter_ns()
         self.get_logger().debug(f"Classification node cycle time: ({((self.end - self.start)*1e6):.3f} ms")
@@ -56,7 +56,7 @@ class Classification(Node):
     def feature_callback(self, msg):
         self.start = perf_counter_ns()
         self.data = self.restructure_data(msg)
-        self.counter = msg.header
+        self.counter = msg.counter
         try:
             
             proba = self.model.predict_proba(self.data)[0]

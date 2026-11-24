@@ -52,6 +52,9 @@ class AdmittanceNode(Node):
         self.emg_buffer = {}
         self.theta_measured = 0.0
 
+        self.start = 0.0
+        self.stop = 0.0
+
         self.publish_motor_command = self.create_publisher(MotionCmd, self.motion_command, self.qos)
         self.torque_subsriber = self.create_subscription(Float32, self.torque_estimator, self.torque_estimator_callback, self.qos)
         self.classification_subscriber = self.create_subscription(Int8WithHeader, self.classification_topic, self.classification_callback, self.qos)
@@ -96,7 +99,7 @@ class AdmittanceNode(Node):
         msg.target_velocity = [self.vel]
         msg.target_torque = [0.0]
         self.publish_motor_command.publish(msg)
-        self.stop = perf_counter_ns
+        self.stop = perf_counter_ns()
         self.get_logger().info(f"Publishing: {msg}")
         self.get_logger().debug(f"Admittance Node Cycle time {((self.stop - self.start) / 1e6):.3f}")
 
@@ -132,7 +135,7 @@ class AdmittanceNode(Node):
 
     def check_sync(self, counter):
         if counter in self.imu_buffer and counter in self.classification_buffer and counter in self.emg_buffer:
-            self.start = perf_counter_ns
+            self.start = perf_counter_ns()
             classification_msg = self.classification_buffer.pop(counter)
             imu_msg = self.imu_buffer.pop(counter)
             emg_msg = self.emg_buffer.pop(counter)

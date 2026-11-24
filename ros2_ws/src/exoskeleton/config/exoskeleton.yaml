@@ -17,7 +17,7 @@ Admittance_Node:
 
 Classification_Node:
   ros__parameters:
-      ML_Model:
+      ML_Model: 'Files/ML models/gesture_model.pkl'
       Update_rate: 0.05
       Confidence_threshold: 0.7
       Subscriber: "/exo/extracted_features"
