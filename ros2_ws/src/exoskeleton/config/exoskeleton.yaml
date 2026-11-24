@@ -1,8 +1,9 @@
+#the first one is a wildcard which is universal
 /**:
   ros__parameters:
       Quality_of_service: 10
 
-admittance:
+Admittance_Node:
   ros__parameters:
       Virtual_mass: 1.0
       Base_K: 0.1
@@ -14,36 +15,47 @@ admittance:
       Motion_command_topic: "/md/motion_command"
       Torque_estimator: "/Torque_estimator"
 
-#classification:
-#  ros__parameters:
-#      ML_Model:
+Classification_Node:
+  ros__parameters:
+      ML_Model:
+      Update_rate: 0.05
+      Confidence_threshold: 0.7
+      Subscriber: "/exo/extracted_features"
+      Publisher: "/exo/classification"
 
-#feature_extraction:
-#  ros__parameters:
-#    Extraction_rate: 0.1
-#    Wamp_threshold: 1
-#    ssc_threshold: 1
-#    Processed_EMG: "/Processed_EMG"
-#    Extracted_features: "/Extracted_features"
+Feature_extraction_Node:
+  ros__parameters:
+    Extraction_rate: 0.1
+    Wamp_threshold: 1
+    ssc_threshold: 1
+    Processed_EMG: "/Processed_EMG"
+    Extracted_features: "/Extracted_features"
 
-#read_emg:
-#  ros__parameters:
+Read_EMG:
+  ros__parameters:
+    output_topic: '/exo/raw_EMG'
+    read_period: 0.05
 
 #read_imu:
 #  ros__parameters:
 
-#setup_node:
-#  ros__parameters:
+Setup_Node:
+  ros__parameters:
+    emg: False
+    
 
-#signal_processing:
-#  ros__parameters:
+Signal_Processing:
+  ros__parameters:
+    input_topic: "/exo/raw_EMG"
+    output_topic: "/exo/processed_EMG"
+    
 
-#time_synchronizer:
-#  ros__parameters:
-#    Queue_size: 10
-#    Max_delay: 0.005
-#    EMG_publisher: "/exo/synced_EMG"
-#    IMU_publisher: "/exo/synced_IMU"
-#    EMG_subscriber:
-#    IMU_subscriber:
+Time_synchronizer:
+  ros__parameters:
+    Queue_size: 10
+    Max_delay: 0.005
+    EMG_publisher: "/exo/synced_EMG"
+    IMU_publisher: "/exo/synced_IMU"
+    EMG_subscriber:
+    IMU_subscriber:
 
