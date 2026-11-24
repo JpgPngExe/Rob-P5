@@ -26,7 +26,8 @@ setup(
         'console_scripts': [            
             'arduino_talker = arduino_output.arduino_ros_test:main',
             'test_listener = arduino_output.test_listener:main',
-            'imu_offset = arduino_output.imu_time_offsetter:main'
+            'imu_offset = arduino_output.imu_time_offsetter:main',
+            'check_esp_round_trip = arduino_output.check_esp_round_trip:main',
         ],
     },
 )

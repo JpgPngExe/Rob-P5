@@ -13,7 +13,7 @@ class ClockSyncNode(Node):
 
         # Serial connection
         self.ser = serial.Serial(
-            '/dev/ttyUSB0',
+            '/dev/ttyACM0',
             115200,
             timeout=0.1
         )
@@ -94,6 +94,12 @@ class ClockSyncNode(Node):
                         continue
 
                     t1 = self.pending_requests.pop(msg_id)
+                self.get_logger().info(
+                f"t1: {t1 / 1e9:.6f} | "
+                f"t2: {t2 / 1e9:.6f} | "
+                f"t3: {t3 / 1e9:.6f} | "
+                f"t4: {t4 / 1e9:.6f}"
+            )
 
                 # Calculate RTT
                 rtt = (t4 - t1) - (t3 - t2)
