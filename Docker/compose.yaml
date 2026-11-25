@@ -10,6 +10,7 @@ services:
     tty: true
     volumes: 
         - ../ros2_ws:/workspace
+        - /tmp/.X11-unix:/tmp/.X11-unix:rw
           
     privileged: true
     working_dir: /workspace
@@ -20,5 +21,6 @@ services:
 
     environment:
       - DISPLAY=${DISPLAY:-:0}
+      - DISPLAY=${DISPLAY}
       - ROS_DOMAIN_ID=30
       - ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET

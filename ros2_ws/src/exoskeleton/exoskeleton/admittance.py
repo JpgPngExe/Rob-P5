@@ -54,7 +54,6 @@ class AdmittanceNode(Node):
         self.stop = 0.0
 
         self.publish_motor_command = self.create_publisher(MotionCmd, self.motion_command, self.qos)
-        self.torque_subsriber = self.create_subscription(Float32, self.torque_estimator, self.torque_estimator_callback, self.qos)
         self.classification_subscriber = self.create_subscription(Int8WithCounter, self.classification_topic, self.classification_callback, self.qos)
         self.imu_subscriber = self.create_subscription(IMU, self.imu_topic, self.imu_callback, self.qos)
         self.processed_emg_subscriber = self.create_subscription(MultiArray, self.emg_topic, self.emg_callback, self.qos)

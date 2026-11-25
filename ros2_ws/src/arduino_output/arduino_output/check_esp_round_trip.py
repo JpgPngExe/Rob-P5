@@ -1,5 +1,6 @@
 import rclpy
 from rclpy.node import Node
+from std_msgs.msg import Float32
 
 import serial
 import threading
@@ -14,10 +15,11 @@ class ClockSyncNode(Node):
         # Serial connection
         self.ser = serial.Serial(
             '/dev/ttyACM0',
-            115200,
+            921600,
             timeout=0.1
         )
-
+        self.rtt = self.create_publisher(Float32, 'esp_rtt', 10)
+        self.offset = self.create_publisher(Float32, 'esp_offset', 10)
         time.sleep(2)
 
         self.lock = threading.Lock()
@@ -123,11 +125,23 @@ class ClockSyncNode(Node):
                     f"Offset: {offset_ms:.3f} ms | "
                     f"RTT: {rtt_ms:.3f} ms"
                 )
+                rtt_msg = Float32()
+                rtt_msg.data = rtt_ms
+                self.rtt.publish(rtt_msg)
+                offset_msg = Float32()
+                offset_msg.data = offset_ms
+                self.offset.publish(offset_msg)
 
                 if len(self.offsets) % 100 == 0:
 
                     avg_offset = sum(self.offsets) / len(self.offsets)
                     avg_delay = sum(self.delays) / len(self.delays)
+                    rtt_msg = Float32()
+                    rtt_msg.data = avg_delay / 1e6
+                    self.rtt.publish(rtt_msg)
+                    offset_msg = Float32()
+                    offset_msg.data = avg_offset / 1e6
+                    self.offset.publish(offset_msg)
 
                     self.get_logger().info(
                         f"Average offset: {avg_offset / 1e6:.3f} ms | "
