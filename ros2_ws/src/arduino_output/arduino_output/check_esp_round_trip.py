@@ -16,7 +16,6 @@ class ClockSyncNode(Node):
         self.ser = serial.Serial(
             '/dev/ttyACM0',
             921600,
-            timeout=0.1
         )
         self.rtt = self.create_publisher(Float32, 'esp_rtt', 10)
         self.offset = self.create_publisher(Float32, 'esp_offset', 10)
