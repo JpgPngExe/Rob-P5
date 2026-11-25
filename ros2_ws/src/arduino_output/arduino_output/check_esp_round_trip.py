@@ -110,7 +110,7 @@ class ClockSyncNode(Node):
                 # Calculate clock offset
                 offset = ((t2 - t1) + (t3 - t4)) / 2
                 elapsed_time = (self.get_ros_time_ns() - self.start_time) / 1e9  # Convert to seconds
-                offset = offset + (0.00915 - 0.000834810768776376) * elapsed_time * 1e6  # Adjust for drift
+                offset = offset + (0.00915) * elapsed_time * 1e6  # Adjust for drift
                 self.offsets.append(offset)
                 self.delays.append(rtt)
 
