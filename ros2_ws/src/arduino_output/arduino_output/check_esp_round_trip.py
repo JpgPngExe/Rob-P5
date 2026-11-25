@@ -17,6 +17,8 @@ class ClockSyncNode(Node):
             '/dev/ttyACM0',
             921600,
         )
+        self.counter = 0.0
+        self.start_time = self.get_ros_time_ns()
         self.rtt = self.create_publisher(Float32, 'esp_rtt', 10)
         self.offset = self.create_publisher(Float32, 'esp_offset', 10)
         time.sleep(2)
@@ -51,7 +53,6 @@ class ClockSyncNode(Node):
     def send_ping(self):
 
         with self.lock:
-
             self.sequence_id += 1
             msg_id = self.sequence_id
 
@@ -63,6 +64,7 @@ class ClockSyncNode(Node):
             message = f"PING,{msg_id},{t1}\n"
 
             self.ser.write(message.encode())
+            
 
     def read_serial(self):
 
@@ -107,7 +109,8 @@ class ClockSyncNode(Node):
 
                 # Calculate clock offset
                 offset = ((t2 - t1) + (t3 - t4)) / 2
-
+                elapsed_time = (self.get_ros_time_ns() - self.start_time) / 1e9  # Convert to seconds
+                offset = offset + (0.00915 - 0.000834810768776376) * elapsed_time * 1e6  # Adjust for drift
                 self.offsets.append(offset)
                 self.delays.append(rtt)
 
