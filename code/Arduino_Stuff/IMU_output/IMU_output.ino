@@ -500,6 +500,7 @@ void loop() {
                 2.0f * (q.w * q.x + q.y * q.z),
                 1.0f - 2.0f * (q.x * q.x + q.y * q.y)
             ) * 180.0f / PI;
+            float angleX = 2.0f * atan2(q.x, q.w) * 180.0f / PI;
             // mpu.dmpGetGravity(&gravity, &q);
             // mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
             // Serial.print("ypr\t");
@@ -508,7 +509,9 @@ void loop() {
             // Serial.print(ypr[1] * 180/M_PI);
             // Serial.print("\t");
             // Serial.print(ypr[2] * 180/M_PI);
+            Serial.print(angleX)
             Serial.println(roll);
+            
         #endif
 
         #ifdef OUTPUT_READABLE_REALACCEL
