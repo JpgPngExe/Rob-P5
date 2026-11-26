@@ -372,31 +372,7 @@ void loop() {
     if (!dmpReady) return;
     // read a packet from FIFO
     if (mpu.dmpGetCurrentFIFOPacket(fifoBuffer)) { // Get the Latest packet 
-      //  #ifdef OUTPUT_READABLE_QUATERNION
-      //      // display quaternion values in easy matrix form: w x y z
-      //      mpu.dmpGetQuaternion(&q, fifoBuffer);
-      //      Serial.print("quat\t");
-      //      Serial.print(q.w);
-      //      Serial.print("\t");
-      //      Serial.print(q.x);
-      //      Serial.print("\t");
-      //      Serial.print(q.y);
-      //      Serial.print("\t");
-      //      Serial.print(q.z);
-      //  #endif
-      //  #ifdef OUTPUT_READABLE_QUATERNION
-      //      // display quaternion values in easy matrix form: w x y z
-      //      mpu2.dmpGetQuaternion(&q2, fifoBuffer2);
-      //      Serial.print(" quat2\t");
-      //      Serial.print(q2.w);
-      //      Serial.print("\t");
-      //      Serial.print(q2.x);
-      //      Serial.print("\t");
-      //      Serial.print(q2.y);
-      //      Serial.print("\t");
-      //      Serial.println(q2.z);
-      //  #endif
-        
+    
         
         #ifdef OUTPUT_READABLE_QUATERNION //Beregner quaternioner til relativ vinkel (aksen kan ændres ved at ændre z til x eller y)
 
@@ -411,7 +387,7 @@ void loop() {
 
             // Inverse of reference quaternion (IMU 1, 0x68)
             Quaternion qInv(q.w, -q.x, -q.y, -q.z);
-
+  
             // Calculate relative quaternion: qInv * q2
             Quaternion qRel;
 
