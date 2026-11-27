@@ -509,7 +509,7 @@ void loop() {
             // Serial.print(ypr[1] * 180/M_PI);
             // Serial.print("\t");
             // Serial.print(ypr[2] * 180/M_PI);
-            Serial.print(angleX)
+            Serial.print(angleX);
             Serial.println(roll);
             
         #endif
