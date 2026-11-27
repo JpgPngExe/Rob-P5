@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 from std_srvs.srv import Trigger
 from mindrove.board_shim import BoardShim, BoardIds, MindRoveInputParams
+from std_msgs.msg import Float64
 from interfaces.msg import MultiArrayTime
 from builtin_interfaces.msg import Time
 import math, time
@@ -35,6 +36,7 @@ class read_emg(Node):
         self.mindrove_connection = None
         self.streaming = False
 
+
         # Create a timer to read data from the MindRove at the specified period
         self.read_timer = self.create_timer(
             self.read_period,
@@ -55,6 +57,8 @@ class read_emg(Node):
             self.output_topic, 
             10
         )
+
+        self.offset_publisher = self.create_publisher(Float64, '/exo/emg_offset', 10)
 
         if self.node_test:
             self.test_connect_mindrove()
@@ -127,7 +131,7 @@ class read_emg(Node):
         try:
             # Get the latest data from the MindRove board
             data = self.mindrove_connection.get_board_data()
-            now_ns = time.time_ns()
+            
             if data.shape[1] == 0:
                 return
 
@@ -149,13 +153,19 @@ class read_emg(Node):
             msg.header.stamp = stamp
 
             self.raw_emg_publisher.publish(msg)
-
-            self.get_logger().debug(f'Published EMG data from timestamp {latest_timestamp}')
-            self.get_logger().debug(f"Time between collecting EMG Window and ROS gets the data {(now_ns - (msg.header.stamp.sec * 1_000_000_000
-                        + msg.header.stamp.nanosec)) / 1e6:.3f} ms")
+            self.offset(msg.header.stamp.sec, msg.header.stamp.nanosec)
+            #self.get_logger().debug(f'Published EMG data from timestamp {latest_timestamp}')
+            #self.get_logger().debug(f"Time between collecting EMG Window and ROS gets the data {(now_ns - (msg.header.stamp.sec * 1_000_000_000
+            #            + msg.header.stamp.nanosec)) / 1e6:.3f} ms")
 
         except Exception as e:
             self.get_logger().error(f'Failed to read or publish EMG: {e}')
+
+    def offset(self, emg_time_sec, emg_time_nanosec):
+        now_ns = self.get_clock().now().nanoseconds
+        msg = Float64()
+        msg.data = (now_ns - (emg_time_sec * 1e9 + emg_time_nanosec)) / 1e6
+        self.offset_publisher.publish(msg)
 
     def destroy_node(self):
         """Stop the stream and release the MindRove session before shutting down"""

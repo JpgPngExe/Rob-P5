@@ -24,6 +24,7 @@ class SerialPublisher(Node):
         self.publisher = self.create_publisher(IMU,'/imu/raw_imu', 10)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.get_logger().info("Serial node initialized")
+        self.start_time = self.get_ros_time_ns()
 
 
 
@@ -58,7 +59,9 @@ class SerialPublisher(Node):
         msg.imu.linear_acceleration.x = float(values[7])
         msg.imu.linear_acceleration.y = float(values[8])
         msg.imu.linear_acceleration.z = float(values[9])
+        elapsed_time = (self.get_ros_time_ns() - self.start_time) / 1e9  # Convert to seconds
         epoch = float(values[10])
+        epoch = epoch + (0.00915) * elapsed_time * 1e6  # Adjust for drift
         stamp = Time()
         stamp.sec = math.floor(epoch)
         stamp.nanosec = math.floor((epoch - stamp.sec) * 1e9)
