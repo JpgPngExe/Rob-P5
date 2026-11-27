@@ -74,7 +74,7 @@ ESP32Time rtc;
 // AD0 low = 0x68 (default for SparkFun breakout and InvenSense evaluation board)
 // AD0 high = 0x69
 MPU6050 mpu;
-MPU6050 mpu2(0x69); // <-- use for AD0 high
+// MPU6050 mpu2(0x69); // <-- use for AD0 high
 
 /* =========================================================================
    NOTE: In addition to connection 3.3v, GND, SDA, and SCL, this sketch
@@ -98,8 +98,8 @@ MPU6050 mpu2(0x69); // <-- use for AD0 high
 // uncomment "OUTPUT_READABLE_QUATERNION" if you want to see the actual
 // quaternion components in a [w, x, y, z] format (not best for parsing
 // on a remote host such as Processing or something though)
-#define OUTPUT_READABLE_QUATERNION
-
+//#define OUTPUT_READABLE_QUATERNION
+#define OUTPUT_READABLE_YAWPITCHROLL
 // uncomment "OUTPUT_READABLE_EULER" if you want to see Euler angles
 // (in degrees) calculated from the quaternions coming from the FIFO.
 // Note that Euler angles suffer from gimbal lock (for more info, see
@@ -224,13 +224,13 @@ void setup() {
     // initialize device
     Serial.println(F("Initializing I2C devices..."));
     mpu.initialize();
-    mpu2.initialize();
+    // mpu2.initialize();
     //pinMode(INTERRUPT_PIN, INPUT);
 
     // verify connection
     Serial.println(F("Testing device connections..."));
     Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
-    Serial.println(mpu2.testConnection() ? F("MPU6050 2 connection successful") : F("MPU6050 connection failed"));
+    // Serial.println(mpu2.testConnection() ? F("MPU6050 2 connection successful") : F("MPU6050 connection failed"));
 
     // wait for ready
     //Serial.println(F("\nSend any character to begin DMP programming and demo: "));
@@ -240,7 +240,7 @@ void setup() {
 
     // load and configure the DMP
     Serial.println(F("Initializing DMP..."));
-    devStatus2 = mpu2.dmpInitialize();
+    // devStatus2 = mpu2.dmpInitialize();
     devStatus = mpu.dmpInitialize();
     
     
@@ -252,10 +252,10 @@ void setup() {
     mpu.setZAccelOffset(2585); // 1688 factory default for my test chip
 
     // supply your own gyro offsets here, scaled for min sensitivity
-    mpu2.setXGyroOffset(70);
-    mpu2.setYGyroOffset(19);
-    mpu2.setZGyroOffset(19);
-    mpu2.setZAccelOffset(4333); // 1688 factory default for my test chip
+    // mpu2.setXGyroOffset(70);
+    // mpu2.setYGyroOffset(19);
+    // mpu2.setZGyroOffset(19);
+    // mpu2.setZAccelOffset(4333); // 1688 factory default for my test chip
 
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
@@ -265,13 +265,13 @@ void setup() {
         mpu.PrintActiveOffsets();
 
         // Calibration Time: generate offsets and calibrate our MPU6050
-        mpu2.CalibrateAccel(6);
-        mpu2.CalibrateGyro(6);
-        mpu2.PrintActiveOffsets();
+        // mpu2.CalibrateAccel(6);
+        // mpu2.CalibrateGyro(6);
+        // mpu2.PrintActiveOffsets();
         // turn on the DMP, now that it's ready
         Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
-        mpu2.setDMPEnabled(true);
+        // mpu2.setDMPEnabled(true);
 
 
 
@@ -288,7 +288,7 @@ void setup() {
 
         // get expected DMP packet size for later comparison
         packetSize = mpu.dmpGetFIFOPacketSize();
-        packetSize2 = mpu2.dmpGetFIFOPacketSize();
+        // packetSize2 = mpu2.dmpGetFIFOPacketSize();
     } else {
         // ERROR!
         // 1 = initial memory load failed
@@ -304,9 +304,9 @@ void setup() {
     // configure LED for output
     pinMode(LED_PIN, OUTPUT);
     mpu.setFullScaleGyroRange(MPU6050_GYRO_FS_250);
-    mpu2.setFullScaleGyroRange(MPU6050_GYRO_FS_250);
+    // mpu2.setFullScaleGyroRange(MPU6050_GYRO_FS_250);
     mpu.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
-    mpu2.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
+    // mpu2.setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
 
     // Connect to Wi-Fi
     Serial.printf("Connecting to %s", ssid);
@@ -371,32 +371,8 @@ void loop() {
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
     // read a packet from FIFO
-    if (mpu.dmpGetCurrentFIFOPacket(fifoBuffer) && mpu2.dmpGetCurrentFIFOPacket(fifoBuffer2)) { // Get the Latest packet 
-      //  #ifdef OUTPUT_READABLE_QUATERNION
-      //      // display quaternion values in easy matrix form: w x y z
-      //      mpu.dmpGetQuaternion(&q, fifoBuffer);
-      //      Serial.print("quat\t");
-      //      Serial.print(q.w);
-      //      Serial.print("\t");
-      //      Serial.print(q.x);
-      //      Serial.print("\t");
-      //      Serial.print(q.y);
-      //      Serial.print("\t");
-      //      Serial.print(q.z);
-      //  #endif
-      //  #ifdef OUTPUT_READABLE_QUATERNION
-      //      // display quaternion values in easy matrix form: w x y z
-      //      mpu2.dmpGetQuaternion(&q2, fifoBuffer2);
-      //      Serial.print(" quat2\t");
-      //      Serial.print(q2.w);
-      //      Serial.print("\t");
-      //      Serial.print(q2.x);
-      //      Serial.print("\t");
-      //      Serial.print(q2.y);
-      //      Serial.print("\t");
-      //      Serial.println(q2.z);
-      //  #endif
-        
+    if (mpu.dmpGetCurrentFIFOPacket(fifoBuffer)) { // Get the Latest packet 
+    
         
         #ifdef OUTPUT_READABLE_QUATERNION //Beregner quaternioner til relativ vinkel (aksen kan ændres ved at ændre z til x eller y)
 
@@ -411,7 +387,7 @@ void loop() {
 
             // Inverse of reference quaternion (IMU 1, 0x68)
             Quaternion qInv(q.w, -q.x, -q.y, -q.z);
-
+  
             // Calculate relative quaternion: qInv * q2
             Quaternion qRel;
 
@@ -519,14 +495,23 @@ void loop() {
         #ifdef OUTPUT_READABLE_YAWPITCHROLL
             // display Euler angles in degrees
             mpu.dmpGetQuaternion(&q, fifoBuffer);
-            mpu.dmpGetGravity(&gravity, &q);
-            mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-            Serial.print("ypr\t");
-            Serial.print(ypr[0] * 180/M_PI);
-            Serial.print("\t");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print("\t");
-            Serial.print(ypr[2] * 180/M_PI);
+            float roll =
+            atan2(
+                2.0f * (q.w * q.x + q.y * q.z),
+                1.0f - 2.0f * (q.x * q.x + q.y * q.y)
+            ) * 180.0f / PI;
+            float angleX = 2.0f * atan2(q.x, q.w) * 180.0f / PI;
+            // mpu.dmpGetGravity(&gravity, &q);
+            // mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+            // Serial.print("ypr\t");
+            // Serial.print(ypr[0] * 180/M_PI);
+            // Serial.print("\t");
+            // Serial.print(ypr[1] * 180/M_PI);
+            // Serial.print("\t");
+            // Serial.print(ypr[2] * 180/M_PI);
+            Serial.print(angleX);
+            Serial.println(roll);
+            
         #endif
 
         #ifdef OUTPUT_READABLE_REALACCEL
